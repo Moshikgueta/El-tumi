@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Panfleto — El Tumi Café</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style id="page-size">@page{size:148mm 210mm;margin:0}</style>
+<style>
+/* Panfleto A5 (148 × 210 mm). Abra com ?a4 para 2 panfletos numa A4 deitada (imprimir e cortar ao meio). */
+:root{--brown:#632916;--ink:#2A1610;--muted:#74615A;--cream:#F8F0E0;--cream2:#F0E2C8;--terra:#B4532A;--ocre:#D99A2B;--line:rgba(42,22,16,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#d9d2c8}
+body{font-family:"Manrope",system-ui,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheets{display:flex;justify-content:center;padding:20px 0}
+@media print{html,body{background:none}.sheets{padding:0}}
+.sheet{width:148mm;height:210mm;background:var(--cream);position:relative;overflow:hidden;display:flex;flex-direction:column}
+@media screen{.sheet{box-shadow:0 10px 40px rgba(0,0,0,.25);margin:0 10px}}
+.band{height:4.5mm;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='18' viewBox='0 0 48 18'%3E%3Crect width='48' height='18' fill='%23632916'/%3E%3Cpath d='M12 3h6v3h3v3h-3v3h-6v-3H9V6h3z' fill='%23D99A2B'/%3E%3Cpath d='M14 7h2v4h-2z' fill='%23632916'/%3E%3Cpath d='M30 0h4v4h4v4h-4v2h4v4h-4v4h-4v-4h-4v-4h4V8h-4V4h4z' fill='%23B4532A'/%3E%3C/svg%3E") repeat-x;background-size:auto 4.5mm;flex:none}
+
+.top{display:grid;grid-template-columns:1fr 50mm;gap:5mm;padding:6mm 8mm 0}
+.brand{display:flex;align-items:center;gap:2.5mm}
+.brand img{width:13mm;height:13mm}
+.brand b{display:block;font:400 13pt/1 "Archivo Black",sans-serif;color:var(--brown);text-transform:uppercase}
+.brand small{display:block;font-size:6pt;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-top:.8mm}
+.hola{margin-top:5mm;font-size:8pt;font-weight:800;color:var(--terra);letter-spacing:.04em}
+h1{font:400 21pt/.98 "Archivo Black",sans-serif;letter-spacing:-.02em;color:var(--brown);margin-top:1.5mm}
+h1 em{font-style:normal;color:var(--terra)}
+.lead{font-size:7.6pt;line-height:1.45;color:var(--muted);margin-top:2.6mm}
+.lead b{color:var(--ink)}
+.pics{position:relative;height:64mm}
+.pics img{position:absolute;object-fit:cover;border-radius:3mm;box-shadow:0 2mm 4mm rgba(60,20,8,.25)}
+.pics .a{left:0;top:0;width:36mm;height:52mm}
+.pics .b{right:0;top:20mm;width:24mm;height:24mm;border-radius:50%;border:1.2mm solid var(--cream)}
+.pics .c{left:14mm;bottom:0;width:26mm;height:20mm;border:1.2mm solid var(--cream);transform:rotate(-4deg)}
+
+.mupeco{margin:4mm 8mm 0;background:var(--brown);color:#F3E3C9;border-radius:3mm;padding:3.4mm 4mm;display:grid;grid-template-columns:1fr auto;gap:3mm;align-items:center}
+.mupeco b{display:block;font:400 10.5pt/1.1 "Archivo Black",sans-serif;color:#fff}
+.mupeco div span{display:block;font-size:7pt;line-height:1.4;color:#EBD3BE;margin-top:.8mm}
+.mupeco .pr{font:800 12pt "Manrope";color:var(--ocre);white-space:nowrap}
+
+.menu{display:grid;grid-template-columns:1fr 1fr;column-gap:6mm;margin:4mm 8mm 0}
+.menu h2{grid-column:1/-1;font:400 10pt "Archivo Black",sans-serif;color:var(--brown);display:flex;justify-content:space-between;align-items:baseline;border-bottom:.3mm solid var(--line);padding-bottom:1.3mm;margin-bottom:.6mm}
+.menu h2 small{font:700 6.2pt "Manrope";color:var(--muted)}
+.row{display:flex;align-items:baseline;gap:1.5mm;padding:1.2mm 0;border-bottom:.25mm dashed rgba(42,22,16,.16)}
+.row .n{font-weight:800;font-size:7.6pt;white-space:nowrap}
+.row .n i{font-style:normal;color:var(--terra)}
+.row .dots{flex:1}
+.row .p{font-weight:800;font-size:7.6pt;font-variant-numeric:tabular-nums;white-space:nowrap}
+.xp{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:2.5mm;margin-top:2.6mm}
+.xp div{background:var(--cream2);border-radius:2.5mm;padding:2mm 2.6mm}
+.xp b{display:flex;justify-content:space-between;font-size:7.6pt;font-weight:800;color:var(--brown)}
+.xp span{display:block;font-size:6.3pt;color:var(--muted);margin-top:.5mm;line-height:1.3}
+
+.foot{margin-top:auto;display:grid;grid-template-columns:21mm 1fr 21mm;gap:3.5mm;align-items:center;padding:3mm 8mm 4mm}
+.qr{text-align:center}
+.qr img{width:21mm;height:21mm;display:block;background:#fff;padding:1.3mm;border-radius:1.5mm;outline:.3mm solid var(--line)}
+.qr span{display:block;font-size:5.6pt;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-top:1mm;color:var(--brown)}
+.info{text-align:center;font-size:7pt;line-height:1.45}
+.info .addr{font-weight:800;font-size:8pt;color:var(--brown)}
+.info .muted{color:var(--muted)}
+.info .ig{display:inline-block;margin-top:1.2mm;background:var(--brown);color:#fff;font-weight:800;font-size:7.6pt;padding:1mm 3mm;border-radius:10mm}
+</style>
+</head>
+<body>
+<div class="sheets" id="sheets">
+<section class="sheet">
+  <div class="band"></div>
+  <header class="top">
+    <div>
+      <div class="brand"><img src="../logo.png" alt=""><div><b>El Tumi</b><small>Café peruano</small></div></div>
+      <p class="hola">¡Hola, vecino!</p>
+      <h1>Café especial com alma <em>peruana</em>, aqui do lado.</h1>
+      <p class="lead">Cafés especiais filtrados na <b>Mupeco</b>, o método peruano de cerâmica, e sabores do Peru: <b>salteña, alfajor, limeñito e mazamorra morada</b>. Puxe uma cadeira.</p>
+    </div>
+    <div class="pics">
+      <img class="a" src="../fotos/mupeco-preparo.jpg" alt="">
+      <img class="b" src="../fotos/cafe-com-laranja.jpg" alt="">
+      <img class="c" src="../fotos/alfajor-cafe.jpg" alt="">
+    </div>
+  </header>
+
+  <div class="mupeco">
+    <div><b>Filtrado na Mupeco ★</b><span>O método que mais ressalta a nossa torra: o café passa pela cerâmica, sem filtro de papel. Servido em 300ml.</span></div>
+    <span class="pr">R$ 25</span>
+  </div>
+
+  <section class="menu">
+    <h2>Favoritos da casa <small>★ favoritos do Tumi</small></h2>
+    <div>
+      <div class="row"><span class="n">Café com rapadura andina <i>★</i></span><span class="dots"></span><span class="p">R$ 20</span></div>
+      <div class="row"><span class="n">Café com laranja</span><span class="dots"></span><span class="p">R$ 25</span></div>
+      <div class="row"><span class="n">Refresco de café <i>★</i></span><span class="dots"></span><span class="p">R$ 25</span></div>
+      <div class="row"><span class="n">Chicha soda <i>★</i></span><span class="dots"></span><span class="p">R$ 17</span></div>
+    </div>
+    <div>
+      <div class="row"><span class="n">Salteña <i>★</i></span><span class="dots"></span><span class="p">R$ 15</span></div>
+      <div class="row"><span class="n">Alfajor peruano <i>★</i></span><span class="dots"></span><span class="p">R$ 11</span></div>
+      <div class="row"><span class="n">Limeñito</span><span class="dots"></span><span class="p">R$ 9</span></div>
+      <div class="row"><span class="n">Mazamorra morada</span><span class="dots"></span><span class="p">R$ 15</span></div>
+    </div>
+    <div class="xp">
+      <div><b>Mini degustação <span style="display:inline;margin:0;color:var(--brown);font-size:7.6pt">R$ 36</span></b><span>Prove os nossos 3 cafés, 100ml cada, no balcão ou no sofá</span></div>
+      <div><b>Pausa del Tumi <span style="display:inline;margin:0;color:var(--brown);font-size:7.6pt">R$ 40</span></b><span>Salteña, alfajor e dulce de leche médio</span></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="qr"><img src="qr-site.svg" alt="QR code do cardápio"><span>Cardápio completo</span></div>
+    <div class="info">
+      <div class="addr">Alameda Augusto Stellfeld, 1281</div>
+      <div class="muted">Bigorrilho · Curitiba</div>
+      <div>Ter a sáb 10h–18h · Dom 12h–18h</div>
+      <span class="ig">@eltumicafe</span>
+    </div>
+    <div class="qr"><img src="qr-insta.svg" alt="QR code do Instagram"><span>Instagram</span></div>
+  </footer>
+  <div class="band"></div>
+</section>
+</div>
+<script>
+if (new URLSearchParams(location.search).has("a4")) {
+  document.getElementById("page-size").textContent = "@page{size:297mm 210mm;margin:0}";
+  const s = document.querySelector(".sheet");
+  s.parentNode.appendChild(s.cloneNode(true));
+  const st = document.createElement("style");
+  st.textContent = "@media print{.sheet{margin:0}.sheet+.sheet{border-left:.2mm dashed #bbb}}";
+  document.head.appendChild(st);
+}
+</script>
+</body>
+</html>
