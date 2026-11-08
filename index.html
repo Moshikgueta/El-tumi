@@ -318,6 +318,10 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 @media (max-width:820px){.langs{margin-left:auto}.langs+.status{margin-left:0}}
 @media (max-width:480px){.langs button{min-width:30px;height:30px;font-size:11.5px}.status{font-size:11px;padding:6px 8px}.brand>span{display:none}.nav{gap:8px}}
 .ftop .tt{white-space:nowrap}
+.map{position:relative;margin-top:20px;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px var(--line);background:var(--clay-2);height:380px}
+.map iframe{display:block;width:100%;height:100%;border:0}
+.map-open{position:absolute;right:14px;bottom:14px;box-shadow:0 8px 20px -8px rgba(0,0,0,.45)}
+@media (max-width:900px){.map{height:300px}}
 /* ---------- destaques (galeria) ---------- */
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
 .tile{position:relative;border-radius:18px;overflow:hidden;background:var(--clay-2);margin:0;border:0;padding:0;cursor:default;text-align:left}
@@ -558,6 +562,11 @@ footer a{text-decoration:none}
           <p>Mora ou trabalha no Bigorrilho? Passa para um café da tarde. Siga a gente no Instagram para ver o que saiu do forno no dia.</p>
           <a class="btn" data-ig href="#" target="_blank" rel="noopener">Seguir no Instagram</a>
         </div>
+      </div>
+      <div class="map">
+        <iframe id="gmap" title="Mapa: El Tumi Café, Alameda Augusto Stellfeld, 1281, Curitiba" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+          src="https://www.google.com/maps?q=El+Tumi+Caf%C3%A9,+Alameda+Augusto+Stellfeld,+1281+-+Bigorrilho,+Curitiba+-+PR,+80430-140&z=17&hl=pt-BR&output=embed"></iframe>
+        <a class="btn btn-m map-open" data-map href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
       </div>
     </div>
   </section>
