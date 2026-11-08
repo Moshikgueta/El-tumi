@@ -105,6 +105,7 @@ const ES = {
   "Link copiado":"Enlace copiado","Rodapé":"Pie de página",
   // placeholders
   "Buscar no cardápio":"Buscar en la carta",
+  "Café":"Café","com alma":"con alma","peruana.":"peruana.","Role para ver":"Desliza para ver",
   // loja
   "Loja":"Tienda",
   "Loja Tumi":"Tienda Tumi",
@@ -257,6 +258,7 @@ const EN = {
   "Ainda sem curtidas. Toque duas vezes num item que você ama.":"No likes yet. Double-tap something you love.",
   "Link copiado":"Link copied",
   "Buscar no cardápio":"Search the menu",
+  "Café":"Coffee","com alma":"with a","peruana.":"Peruvian soul.","Role para ver":"Scroll to see",
   // shop
   "Loja":"Shop",
   "Loja Tumi":"Tumi shop",
