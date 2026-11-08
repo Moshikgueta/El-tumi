@@ -231,7 +231,7 @@ main{overflow-x:clip}
 .slide .pat2{position:absolute;inset:0;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M21 7h14v7h7v7h7v14h-7v7h-7v7H21v-7h-7v-7H7V21h7v-7h7z' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E");background-size:56px}
 .slide .hero-ic{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:min(72%,340px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#FFF8EC 0 62%,#F3E3C6 63%);display:grid;place-items:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
 .slide .hero-ic::before{content:"";position:absolute;inset:6%;border-radius:50%;border:2px dashed rgba(99,41,22,.22)}
-.slide .hero-ic svg{width:56%;height:auto;filter:drop-shadow(0 10px 14px rgba(60,20,8,.25))}
+.slide .hero-ic svg{width:56%;height:auto}
 .slide.active .hero-ic svg{animation:float 4s ease-in-out infinite}
 @keyframes float{50%{transform:translateY(-8px) rotate(-2deg)}}
 .slide .shade{position:absolute;inset:auto 0 0 0;height:60%;background:linear-gradient(to top,rgba(10,4,2,.85),rgba(10,4,2,0))}
@@ -249,7 +249,7 @@ main{overflow-x:clip}
 .feed button{touch-action:manipulation}
 .reel{-webkit-overflow-scrolling:touch}
 .rail button,.rail a{width:54px;border:0;background:none;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px;font:700 12.5px var(--sans);cursor:pointer;text-decoration:none;font-variant-numeric:tabular-nums;padding:0}
-.rail .b{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);display:grid;place-items:center;transition:transform .15s var(--ease),background-color .2s ease}
+.rail .b{width:50px;height:50px;border-radius:50%;background:rgba(30,16,10,.45);display:grid;place-items:center;transition:transform .15s var(--ease),background-color .2s ease}
 .rail button:active .b{transform:scale(.88)}
 .rail svg{width:26px;height:26px}
 .like[aria-pressed=true] .b{background:#fff}
@@ -257,7 +257,7 @@ main{overflow-x:clip}
 .like.pop .b{animation:pop .4s var(--ease)}
 @keyframes pop{40%{transform:scale(1.25)}}
 .burst{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;pointer-events:none;z-index:3;animation:burst .8s var(--ease) forwards}
-.burst svg{width:100%;height:100%;fill:#E0303F;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4))}
+.burst svg{width:100%;height:100%;fill:#E0303F}
 @keyframes burst{0%{transform:scale(.3) rotate(-12deg);opacity:0}25%{transform:scale(1.1) rotate(-6deg);opacity:1}60%{transform:scale(1) rotate(-6deg);opacity:1}100%{transform:translateY(-70px) scale(.9) rotate(-6deg);opacity:0}}
 .ftop{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 12px 12px;background:linear-gradient(to bottom,rgba(10,4,2,.55),rgba(10,4,2,0));pointer-events:none}
 .ftop>*{pointer-events:auto}
@@ -265,11 +265,11 @@ main{overflow-x:clip}
 .ftop .tt{font-weight:800;font-size:15px;line-height:1.1}
 .ftop .tt small{display:block;font-weight:600;font-size:12px;opacity:.75;font-variant-numeric:tabular-nums}
 .ftop .sp{flex:1}
-.fbtn{height:40px;border-radius:999px;border:0;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);color:#fff;font:700 13.5px var(--sans);padding:0 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.fbtn{height:40px;border-radius:999px;border:0;background:rgba(30,16,10,.5);color:#fff;font:700 13.5px var(--sans);padding:0 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .fbtn.x{width:40px;padding:0;justify-content:center;font-size:22px}
 .fcats{position:absolute;top:calc(62px + env(safe-area-inset-top));left:0;right:0;z-index:4;display:flex;gap:6px;overflow-x:auto;padding:0 12px;scrollbar-width:none}
 .fcats::-webkit-scrollbar{display:none}
-.fcats button{flex:none;border:0;border-radius:999px;padding:7px 12px;font:700 12.5px var(--sans);background:rgba(255,255,255,.14);color:#fff;cursor:pointer;backdrop-filter:blur(6px)}
+.fcats button{flex:none;border:0;border-radius:999px;padding:7px 12px;font:700 12.5px var(--sans);background:rgba(30,16,10,.45);color:#fff;cursor:pointer}
 .fcats button[aria-current=true]{background:#fff;color:var(--ink)}
 .hint{position:absolute;left:50%;top:calc(112px + env(safe-area-inset-top));transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:13px;font-weight:700;color:#fff;background:rgba(10,4,2,.55);backdrop-filter:blur(6px);padding:8px 14px;border-radius:999px;pointer-events:none;transition:opacity .3s ease}
 .hint svg{width:18px;height:18px;animation:nudge 1.4s ease-in-out infinite}
@@ -960,9 +960,11 @@ const api=(op,id)=>fetch(`${CONFIG.likesApi}/${op}/${CONFIG.likesNamespace}/${id
 const shown=id=>apiOk? Math.max(counts[id]||0, mine.has(id)?1:0) : (mine.has(id)?1:0);
 function fmt(n){ return n>=1000? (n/1000).toFixed(1).replace(".",",")+" mil" : String(n); }
 const pricesHTML=x=>Array.isArray(x.p)? x.p.map(([l,v])=>`<span><small>${l}</small>${BRL0(v)}</span>`).join("") : `<span>${BRL0(x.p)}</span>`;
-$("#reel").innerHTML=FEED.map((x,i)=>{ const [c1,c2,ic]=CATSTYLE[x.catId]; const icon=ITEMICON[x.n]||ic; const tg=x.tags||[];
+const reel=$("#reel");
+const HEART=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9.2C1.4 7.6 3.5 4.5 6.8 4.5c2 0 3.4 1.1 4.2 2.4h2c.8-1.3 2.2-2.4 4.2-2.4 3.3 0 5.4 3.1 4.1 6.3C19.5 15.4 12 20 12 20z"/></svg>`;
+const slideInner=(x,i)=>{ const [c1,c2,ic]=CATSTYLE[x.catId]; const icon=ITEMICON[x.n]||ic; const tg=x.tags||[];
   const ph=ITEMPHOTO[x.n];
-  return `<section class="slide ${ph?"has-photo":""}" data-i="${i}" id="f-${x.id}" aria-label="${x.n}, ${i+1} de ${FEED.length}">
+  return `
     <div class="bg" style="background:radial-gradient(120% 80% at 50% 30%,${c1},${c2})"></div><div class="pat2"></div>
     ${ph?`<img class="photo" src="${ph}" alt="${x.n}" loading="lazy" draggable="false">`:""}
     <div class="hero-ic"><svg viewBox="0 0 30 30" aria-hidden="true">${ICONS[icon]}</svg></div>
@@ -975,15 +977,20 @@ $("#reel").innerHTML=FEED.map((x,i)=>{ const [c1,c2,ic]=CATSTYLE[x.catId]; const
       <div class="prices">${pricesHTML(x)}</div>
     </div>
     <div class="rail">
-      <button type="button" class="like" data-like="${x.id}" aria-pressed="${mine.has(x.id)}" aria-label="Curtir ${x.n}"><span class="b"></span><span class="n" data-n="${x.id}">${fmt(shown(x.id))}</span></button>
+      <button type="button" class="like" data-like="${x.id}" aria-pressed="${mine.has(x.id)}" aria-label="Curtir ${x.n}"><span class="b">${HEART}</span><span class="n" data-n="${x.id}">${fmt(shown(x.id))}</span></button>
       <button type="button" data-share="${i}" aria-label="Compartilhar ${x.n}"><span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg></span>Enviar</button>
       ${x.link?`<button type="button" data-goto-mupeco aria-label="Ver como é feito na Mupeco"><span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg></span>Como é</button>`:""}
     </div>
-  </section>`; }).join("");
-$$("#reel .like .b").forEach(b=>b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9.2C1.4 7.6 3.5 4.5 6.8 4.5c2 0 3.4 1.1 4.2 2.4h2c.8-1.3 2.2-2.4 4.2-2.4 3.3 0 5.4 3.1 4.1 6.3C19.5 15.4 12 20 12 20z"/></svg>`);
+  `; };
+// Só as telas perto da atual têm conteúdo: com as 55 cheias o Safari do iPhone fica sem memória e trava a aba.
+$("#reel").innerHTML=FEED.map((x,i)=>`<section class="slide ${ITEMPHOTO[x.n]?"has-photo":""}" data-i="${i}" id="f-${x.id}" aria-label="${x.n}, ${i+1} de ${FEED.length}"></section>`).join("");
+const filled=new Set();
+function fillAround(c){ const keep=new Set(); for(let k=c-2;k<=c+2;k++) if(k>=0&&k<FEED.length) keep.add(k);
+  filled.forEach(k=>{ if(!keep.has(k)){ reel.children[k].innerHTML=""; filled.delete(k); } });
+  keep.forEach(k=>{ if(!filled.has(k)){ reel.children[k].innerHTML=slideInner(FEED[k],k); filled.add(k); } }); }
 $("#fcats").innerHTML=MENU.map(c=>`<button type="button" data-fcat="${c.id}">${c.name}</button>`).join("");
 
-const feed=$("#feed"), reel=$("#reel"); let cur=0, lastF, hashT;
+const feed=$("#feed"); let cur=0, lastF, hashT;
 const toSlide=(i,smooth)=>{ const s=reel.children[i]; if(s) reel.scrollTo({top:s.offsetTop, behavior: smooth&&!reduce?"smooth":"auto"}); };
 function updLike(id){ $$(`[data-like="${id}"]`).forEach(b=>b.setAttribute("aria-pressed",mine.has(id))); $$(`[data-n="${id}"]`).forEach(n=>n.textContent=fmt(shown(id))); }
 function like(id, force){
@@ -992,18 +999,18 @@ function like(id, force){
   if(on && apiOk && !sent.has(id)){ sent.add(id); localStorage.setItem(SENT,JSON.stringify([...sent])); counts[id]=(counts[id]||0)+1; updLike(id);
     api("hit",id).then(v=>{counts[id]=v; updLike(id);}).catch(()=>{}); }
   updLike(id);
-  const b=$(`[data-like="${id}"]`); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop");
+  const b=$(`[data-like="${id}"]`); if(b){ b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
 }
 function loadCount(id){ if(!apiOk || counts[id]!==undefined) return; counts[id]=counts[id]||0; api("get",id).then(v=>{counts[id]=v; updLike(id);}).catch(()=>{ apiOk=false; FEED.forEach(f=>updLike(f.id)); }); }
-const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const i=+e.target.dataset.i; cur=i; $$(".slide").forEach(s=>s.classList.toggle("active",s===e.target));
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const i=+e.target.dataset.i; cur=i; fillAround(i); $$(".slide").forEach(s=>s.classList.toggle("active",s===e.target));
   $("#fpos").textContent=`${i+1} / ${FEED.length}`; const c=FEED[i].catId; $$("#fcats button").forEach(b=>{ const on=b.dataset.fcat===c; b.setAttribute("aria-current",on); if(on){ const fc=$("#fcats"); fc.scrollLeft = b.offsetLeft - fc.clientWidth/2 + b.clientWidth/2; } });
   loadCount(FEED[i].id); if(FEED[i+1]) loadCount(FEED[i+1].id); if(i>0) $("#hint").classList.add("gone");
   clearTimeout(hashT); hashT=setTimeout(()=>{ try{ history.replaceState(null,"","#feed="+FEED[i].id); }catch(_){} },500); } }),{root:reel,threshold:.6});
 $$(".slide").forEach(s=>io.observe(s));
 const go=i=>{ i=Math.max(0,Math.min(FEED.length-1,i)); toSlide(i,true); };
 function openFeed(id){ lastF=document.activeElement; feed.removeAttribute("inert"); feed.classList.add("open"); document.documentElement.style.overflow="hidden";
-  const i=Math.max(0,FEED.findIndex(f=>f.id===id)); requestAnimationFrame(()=>toSlide(i,false)); setTimeout(()=>$("#fClose").focus({preventScroll:true}),50); }
-function closeFeed(){ clearTimeout(hashT); feed.classList.remove("open"); feed.setAttribute("inert",""); document.documentElement.style.overflow=""; $("#topSheet").classList.remove("open"); try{ history.replaceState(null,"",location.pathname+location.search); }catch(_){} lastF&&lastF.focus&&lastF.focus({preventScroll:true}); }
+  const i=Math.max(0,FEED.findIndex(f=>f.id===id)); fillAround(i); requestAnimationFrame(()=>toSlide(i,false)); setTimeout(()=>$("#fClose").focus({preventScroll:true}),50); }
+function closeFeed(){ clearTimeout(hashT); filled.forEach(k=>reel.children[k].innerHTML=""); filled.clear(); feed.classList.remove("open"); feed.setAttribute("inert",""); document.documentElement.style.overflow=""; $("#topSheet").classList.remove("open"); try{ history.replaceState(null,"",location.pathname+location.search); }catch(_){} lastF&&lastF.focus&&lastF.focus({preventScroll:true}); }
 $$("[data-open-feed]").forEach(b=>b.addEventListener("click",()=>openFeed()));
 $("#fClose").onclick=closeFeed;
 $("#fcats").addEventListener("click",e=>{ const b=e.target.closest("[data-fcat]"); if(b) go(FEED.findIndex(f=>f.catId===b.dataset.fcat)); });
