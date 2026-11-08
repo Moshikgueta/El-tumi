@@ -299,6 +299,19 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 .slide.has-photo .shade{height:70%;background:linear-gradient(to top,rgba(10,4,2,.92),rgba(10,4,2,.35) 55%,rgba(10,4,2,0))}
 .slide .credit{position:absolute;top:calc(112px + env(safe-area-inset-top));right:12px;z-index:2;font-size:11px;font-weight:700;color:#fff;background:rgba(10,4,2,.45);padding:4px 9px;border-radius:999px}
 
+
+/* ---------- avaliações do Google com fotos ---------- */
+.reviews{columns:4 240px;column-gap:16px;margin-bottom:28px}
+.rv{break-inside:avoid;margin:0 0 16px;background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.rv img{width:100%;height:auto;display:block;cursor:zoom-in}
+.rv .rb{padding:16px 18px 18px}
+.rv .stars{color:var(--ocre);letter-spacing:2px;font-size:15px}
+.rv p{margin:6px 0 10px;font-size:15px;line-height:1.45;color:var(--ink)}
+.rv .who{font-size:13px;color:var(--muted)}
+.rv .who b{color:var(--ink);font-weight:700}
+.g-badge{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--muted);margin:0 0 18px}
+.press-h{font:400 22px/1.1 var(--display);color:var(--morado);margin:8px 0 14px;letter-spacing:-.01em}
+
 /* ---------- destaques (galeria) ---------- */
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
 .tile{position:relative;border-radius:18px;overflow:hidden;background:var(--clay-2);margin:0;border:0;padding:0;cursor:default;text-align:left}
@@ -494,8 +507,11 @@ footer a{text-decoration:none}
     <div class="wrap">
       <div class="sec-head">
         <div><p class="kick">Quem provou</p><h2>Avaliações e imprensa.</h2></div>
-        <p>O que já escreveram sobre o El Tumi. Toque na fonte para ler a matéria completa.</p>
+        <p>O que os clientes e a imprensa dizem do El Tumi. Toque numa foto para ampliar.</p>
       </div>
+      <p class="g-badge">★★★★★ Avaliações de clientes no Google, com as fotos deles</p>
+      <div class="reviews" id="reviews"></div>
+      <h3 class="press-h">Na imprensa</h3>
       <div class="praise" id="praise"></div>
     </div>
   </section>
@@ -668,6 +684,25 @@ const PHOTOS = [
   {key:"laranja",  title:"Café com laranja",     size:"wide", src:"fotos/cafe-com-laranja.jpg"}
 ];
 /* Avaliações: só textos reais, com a fonte. Para avaliações do Google, copie o texto e o primeiro nome. */
+/* Avaliações reais do Google (trecho visível de cada uma). Fotos dos próprios clientes. */
+const REVIEWS = [
+  {who:"Karen S.", when:"9 meses atrás", img:"fotos/rev-limenito-alfajor.jpg", alt:"Limeñito e alfajor peruano",
+   text:"O alfajor, o café com rapadura, a chicha soda e o limeñito são deliciosos e…"},
+  {who:"José T.", when:"7 meses atrás", img:"fotos/rev-turron-capuccino.jpg", alt:"Turrón com confeitos e um cappuccino",
+   text:"O Tumi é um lugar onde é possível provar, além de um excelente café, um…"},
+  {who:"Alana A.", when:"9 meses atrás", img:"fotos/rev-latte-art.jpg", alt:"Café com arte no leite",
+   text:"Uma experiência sensorial maravilhosa! Adorei conhecer um pouco mais do…"},
+  {who:"Iuri M.", when:"3 meses atrás", img:"fotos/rev-turron.jpg", alt:"Turrón em camadas com confeitos coloridos",
+   text:"Voltei de Lima há poucos dias. As comidas e cafés de lá são maravilhosos,…"},
+  {who:"Lisia O.", when:"1 mês atrás", img:"fotos/rev-sanduiche.jpg", alt:"Sanduíches tostados e cafés",
+   text:"Comida: 5 · Serviço: 5 · Ambiente: 5. Nível de barulho: silencioso…"},
+  {who:"Gabriel", when:"2 meses atrás", img:"fotos/rev-crema-volteada.jpg", alt:"Crema volteada com canela",
+   text:"Crema volteada con canela."},
+  {who:"Kevin B.", when:"8 meses atrás", img:"fotos/rev-gelado.jpg", alt:"Café gelado no balcão",
+   text:"Comida: 5 · Serviço: 5 · Ambiente: 5. Reservas: não é necessário…"},
+  {who:"Karen S.", when:"9 meses atrás", img:"fotos/rev-capuccino.jpg", alt:"Cappuccino com coração no leite",
+   text:"O alfajor, o café com rapadura, a chicha soda e o limeñito são deliciosos e…"}
+];
 const PRAISE = [
   {feature:true, text:"O Mupeco é o destaque da casa: uma experiência diferente até para quem já conhece prensa francesa e V60.",
    source:"Mural do Paraná", url:"https://muraldoparana.com.br/vai-bem-com-cafe-dois-cafes-especiais-para-sair-do-obvio/", kind:"resumo da matéria"},
@@ -794,7 +829,7 @@ $$("[data-f]").forEach(b=>b.addEventListener("click",()=>{
 /* ---------- modo feed ---------- */
 const CATSTYLE={cafes:["#632916","#3A1A0E","cup"],gelados:["#2E4B57","#16262D","ice"],semcafe:["#5A3A63","#2C1B33","choc"],salgados:["#8A4A1E","#3F200C","empanada"],postres:["#7A2E3A","#3A141B","alfajor"],experiencias:["#3A2416","#1A0F09","three"],alcoolicos:["#1F3A33","#0E1C18","cocktail"]};
 const ITEMICON={"Filtrado na Mupeco":"mupeco","Café com laranja":"orange","Mazamorra morada":"bowl","Alfajor peruano":"alfajor","Limeñito":"star","Salteña":"empanada","Pães tostados com manteiga":"bread","Pão de queijo":"bread","3 pães de queijo":"bread","Sanduba relleno":"sandwich","Queijo quente vegano":"sandwich","Inka soda":"ice","Chicha soda":"soda","Suco de laranja":"orange","Leche dulce":"milk","Mate com leche":"milk","Café com rapadura andina":"milk","Dulce de leche café":"milk","Torta helada":"cake","Queque":"cake","Brigadeiro":"choc","Turrón Doña Clorinda":"cake","Mini degustação":"three","Peru Libre":"soda"};
-const ITEMPHOTO={"Filtrado na Mupeco":"fotos/mupeco-preparo.jpg","Café com laranja":"fotos/cafe-com-laranja.jpg","Inka soda":"fotos/inka-soda.jpg","Alfajor peruano":"fotos/alfajor-cafe.jpg","Pausa del Tumi":"fotos/alfajor-mao.jpg"};
+const ITEMPHOTO={"Turrón Doña Clorinda":"fotos/rev-turron.jpg","Café de la mamita":"fotos/rev-turron-capuccino.jpg","Limeñito":"fotos/rev-limenito-alfajor.jpg","Cappuccino":"fotos/rev-capuccino.jpg","Filtrado na Mupeco":"fotos/mupeco-preparo.jpg","Café com laranja":"fotos/cafe-com-laranja.jpg","Inka soda":"fotos/inka-soda.jpg","Alfajor peruano":"fotos/alfajor-cafe.jpg","Pausa del Tumi":"fotos/alfajor-mao.jpg"};
 const slug=s=>norm(s).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const FEED=MENU.flatMap(c=>c.items.map(x=>({...x,cat:c.name,catId:c.id,id:c.id+"-"+slug(x.n)})));
 const LKEY="eltumi-likes-v1"; const mine=new Set(JSON.parse(localStorage.getItem(LKEY)||"[]"));
@@ -899,6 +934,13 @@ $("#gallery").addEventListener("click",e=>{ const f=e.target.closest("[data-i]")
 $("#gallery").addEventListener("keydown",e=>{ const f=e.target.closest("[data-i]"); if(f&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); openLb(+f.dataset.i); } });
 
 /* ---------- avaliações ---------- */
+
+$("#reviews").innerHTML = REVIEWS.map((r,i)=>`
+  <article class="rv"><img src="${r.img}" alt="${r.alt}" loading="lazy" data-rv="${i}">
+    <div class="rb"><span class="stars" aria-label="5 de 5 estrelas">★★★★★</span><p>${r.text}</p>
+    <span class="who"><b>${r.who}</b> · ${r.when} · Google</span></div></article>`).join("");
+$("#reviews").addEventListener("click",e=>{ const im=e.target.closest("[data-rv]"); if(!im) return; const r=REVIEWS[+im.dataset.rv];
+  lb.querySelector("img").src=r.img; lb.querySelector("img").alt=r.alt; lb.querySelector("p").textContent=`Foto de ${r.who} no Google`; lb.classList.add("open"); lb.querySelector("button").focus(); });
 $("#praise").innerHTML = PRAISE.map(r=>`
   <article class="quote ${r.feature?"feature":""}">
     ${r.score?`<div class="score"><b>${r.score}</b><span class="stars" aria-label="${r.score} de 5 estrelas">★★★★★</span></div>`:""}
