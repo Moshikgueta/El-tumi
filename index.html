@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El Tumi Café · café peruano no Bigorrilho, Curitiba</title>
+<meta name="description" content="Café especial com alma peruana no Bigorrilho. Café filtrado no método Mupeco, mazamorra morada, alfajor peruano e mais. Alameda Augusto Stellfeld, 1281 · Curitiba.">
+<meta name="theme-color" content="#632916">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --clay:#F8F0E0; --clay-2:#F0E2C8; --card:#FFFAF0;
+  --ink:#2A1610; --muted:#74615A; --line:rgba(36,22,28,.13);
+  --morado:#632916; --morado-2:#7A3620; --cream:#F8EBC9; --terra:#B4532A; --ocre:#D99A2B; --verde:#2F5D50;
+  --display:"Archivo Black","Arial Black",sans-serif; --sans:"Manrope",system-ui,sans-serif;
+  --ease:cubic-bezier(.23,1,.32,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--clay);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit} button{font:inherit;color:inherit}
+img,svg{display:block}
+.wrap{width:min(1160px,100% - 48px);margin-inline:auto}
+@media (max-width:600px){.wrap{width:calc(100% - 36px)}}
+:focus-visible{outline:2px solid var(--terra);outline-offset:3px;border-radius:4px}
+.num{font-variant-numeric:tabular-nums}
+
+/* faixa andina (padrão próprio: degraus e losangos) */
+.band{height:18px;background:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='18' viewBox='0 0 48 18'%3E%3Crect width='48' height='18' fill='%23632916'/%3E%3Cpath d='M0 9h6V6h3V3h6v3h3v3h6v0h0' fill='none'/%3E%3Cpath d='M12 3h6v3h3v3h-3v3h-6v-3H9V6h3z' fill='%23D99A2B'/%3E%3Cpath d='M14 7h2v4h-2z' fill='%23632916'/%3E%3Cpath d='M30 0h4v4h4v4h-4v2h4v4h-4v4h-4v-4h-4v-4h4V8h-4V4h4z' fill='%23B4532A'/%3E%3Crect x='0' y='0' width='48' height='2' fill='%23F4ECE1' opacity='.0'/%3E%3C/svg%3E") repeat-x;background-size:auto 18px}
+
+/* header */
+header{position:sticky;top:0;z-index:10;background:rgba(248,240,224,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 transparent;transition:box-shadow .2s ease}
+header.scrolled{box-shadow:0 1px 0 var(--line)}
+.nav{display:flex;align-items:center;gap:32px;height:70px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{width:44px;height:44px}
+.brand{white-space:nowrap}
+.hola svg{color:var(--morado)}
+.brand b{font:400 21px/1 var(--display);letter-spacing:.01em;color:var(--morado);text-transform:uppercase}
+.brand small{display:block;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-top:2px;font-weight:600}
+.nav nav{display:flex;gap:26px;margin-left:auto;font-size:15px}
+.nav nav a{text-decoration:none;color:var(--muted);transition:color .15s ease}
+@media (hover:hover){.nav nav a:hover{color:var(--ink)}}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;padding:7px 12px;border-radius:20px;background:var(--card);box-shadow:0 0 0 1px var(--line);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:#B7A9A6}
+.dot.on{background:#3FAE6E;box-shadow:0 0 0 3px rgba(63,174,110,.2)}
+@media (max-width:820px){.nav nav{display:none}.status{margin-left:auto}}
+@media (max-width:480px){.brand small{display:none}.status{font-size:12px;padding:6px 10px}.nav{gap:12px;height:62px}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;padding:0 22px;border-radius:999px;border:0;font:600 15px var(--sans);text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .2s ease,box-shadow .2s ease,transform .12s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn-m{background:var(--morado);color:#fff}
+@media (hover:hover){.btn-m:hover{background:var(--morado-2)}}
+.btn-o{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(36,22,28,.3)}
+@media (hover:hover){.btn-o:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}}
+.btn svg{width:18px;height:18px}
+
+/* hero */
+.hero{padding:clamp(32px,6vw,80px) 0 90px;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hola{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:14px;letter-spacing:.04em;color:var(--terra);margin:0 0 20px}
+.hola svg{width:18px;height:18px}
+h1{font:400 clamp(44px,6.4vw,84px)/.98 var(--display);margin:0 0 24px;letter-spacing:-.025em;color:var(--morado);text-wrap:balance}
+h1 em{font-style:normal;color:var(--terra)}
+.lead{font-size:clamp(17px,1.5vw,19px);color:var(--muted);max-width:32em;margin:0 0 32px;text-wrap:pretty}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.info-row{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:40px;font-size:14.5px;color:var(--muted)}
+.info-row b{color:var(--ink);font-weight:600}
+
+/* hero art: xícara + Mupeco desenhados */
+.art{position:relative;aspect-ratio:1;max-width:500px;justify-self:end;width:100%}
+.sun{position:absolute;inset:6%;border-radius:50%;background:var(--morado)}
+.sun::after{content:"";position:absolute;inset:9%;border-radius:50%;border:2px dashed rgba(217,154,43,.55)}
+.art svg{position:absolute;inset:0;width:100%;height:100%}
+.steam path{stroke-dasharray:4 10;animation:steam 3.4s linear infinite}
+.steam path:nth-child(2){animation-delay:-1.1s}.steam path:nth-child(3){animation-delay:-2.2s}
+@keyframes steam{to{stroke-dashoffset:-56}}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}.art{max-width:260px;justify-self:center;order:-1}}
+
+section{padding:100px 0}
+h2{font:400 clamp(34px,4.4vw,56px)/1.02 var(--display);letter-spacing:-.02em;margin:0;color:var(--morado);text-wrap:balance}
+.kick{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);margin:0 0 14px}
+.sec-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:44px}
+.sec-head>p{margin:0;color:var(--muted);justify-self:end;max-width:30em}
+@media (max-width:900px){section{padding:72px 0}.sec-head{grid-template-columns:1fr;gap:14px}.sec-head>p{justify-self:start}}
+
+/* ---------- Mupeco interativo ---------- */
+.mupeco{background:#2B140C;color:#EFE3EE}
+.mupeco h2{color:#fff}
+.mupeco .kick{color:var(--ocre)}
+.mupeco .sec-head>p{color:#CDB9CC}
+.lab{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:center}
+.rig{position:relative;background:rgba(248,235,201,.06);border-radius:20px;padding:24px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.rig svg{width:100%;height:auto}
+.slider{margin-top:18px}
+.slider label{display:flex;justify-content:space-between;font-size:13.5px;color:#CDB9CC;margin-bottom:10px}
+.slider label b{color:#fff;font-weight:600}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;cursor:grab}
+input[type=range]:active{cursor:grabbing}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--ocre) var(--p,0%),rgba(255,255,255,.18) var(--p,0%))}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:rgba(255,255,255,.18)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--ocre)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;margin-top:-10px;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.stages{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.stages li{display:grid;grid-template-columns:40px 1fr;gap:12px;padding:16px 16px 16px 12px;border-radius:12px;transition:background-color .25s ease,opacity .25s ease;opacity:.5;cursor:pointer}
+.stages li.on{opacity:1;background:rgba(255,255,255,.07)}
+.stages .n{font:400 24px/1 var(--display);color:var(--ocre)}
+.stages h3{margin:0 0 3px;font-size:17px;color:#fff;font-weight:600}
+.stages p{margin:0;font-size:14.5px;color:#D8C6D6}
+.compare{margin-top:26px;background:rgba(255,255,255,.06);border-radius:14px;padding:18px}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;background:rgba(0,0,0,.22);border-radius:999px;padding:4px;margin-bottom:16px}
+.seg button{border:0;background:none;color:#D8C6D6;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;min-height:40px;transition:background-color .2s ease,color .2s ease}
+.seg button[aria-pressed=true]{background:#fff;color:var(--morado)}
+.meter{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:center;font-size:14px;margin-top:8px;color:#D8C6D6}
+.meter i{display:block;height:8px;border-radius:4px;background:rgba(255,255,255,.14);overflow:hidden}
+.meter i::after{content:"";display:block;height:100%;width:var(--w);background:var(--ocre);border-radius:4px;transition:width .5s var(--ease)}
+.compare small{display:block;margin-top:12px;color:#BFA9BE;font-size:13px}
+@media (max-width:900px){.lab{grid-template-columns:1fr;gap:28px}}
+
+/* ---------- cardápio ---------- */
+.menu-note{margin:24px 0 0;font-size:14px;color:var(--muted)}
+
+/* ---------- história ---------- */
+.story{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.story blockquote{margin:0;font:400 clamp(24px,2.8vw,34px)/1.2 var(--display);letter-spacing:-.015em;color:var(--morado);text-wrap:balance}
+.story .who{margin-top:22px;font-size:14px;color:var(--muted)}
+.story p{color:var(--muted);margin:0 0 16px}
+.logo-big{width:100%;max-width:380px;height:auto;margin:0 auto;filter:drop-shadow(0 24px 40px rgba(99,41,22,.28))}
+.medal{position:relative;aspect-ratio:1;width:100%;max-width:400px;margin:0 auto;border-radius:50%;background:var(--morado);display:grid;place-items:center}
+.medal::before{content:"";position:absolute;inset:7%;border-radius:50%;border:2px dashed rgba(217,154,43,.55)}
+.medal svg{width:46%;height:auto;aspect-ratio:1;color:#F4ECE1}
+.medal span{position:absolute;bottom:15%;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#E7D6E6;font-weight:700}
+@media (max-width:900px){.story{grid-template-columns:1fr;gap:36px}.logo-big{max-width:240px}}
+
+/* ---------- visita ---------- */
+.visit-sec{background:var(--clay-2)}
+.visit{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}
+.card{background:var(--card);border-radius:20px;padding:32px;box-shadow:0 0 0 1px var(--line)}
+.card h3{margin:0 0 6px;font:400 26px/1.1 var(--display);letter-spacing:-.015em;color:var(--morado)}
+.card .a{color:var(--muted);margin:0 0 22px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:4px 0 22px}
+.day{border-radius:12px;padding:12px 4px;text-align:center;background:var(--clay);font-size:13px;color:var(--muted)}
+.day b{display:block;font-size:14px;color:var(--ink);margin-bottom:4px}
+.day.off{opacity:.55}
+.day.today{background:var(--morado);color:#E7D6E6}
+.day.today b{color:#fff}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.neighbors{background:var(--terra);color:#FBEDE4}
+.neighbors h3{color:#fff}
+.neighbors p{color:#F6D9C9}
+.neighbors .btn{background:#fff;color:var(--terra)}
+@media (max-width:900px){.storefront{grid-row:auto;min-height:0;aspect-ratio:4/5}.visit{grid-template-columns:1fr}.card{padding:24px}.day{padding:10px 2px;font-size:11.5px}.day b{font-size:12.5px}}
+
+
+
+/* ---------- cardápio digital ---------- */
+.mtools{position:sticky;top:70px;z-index:5;background:rgba(248,240,224,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 0;margin:0 0 8px;border-bottom:1px solid var(--line)}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:none;text-decoration:none;font-weight:600;font-size:14px;padding:9px 15px;border-radius:999px;color:var(--muted);background:var(--card);box-shadow:0 0 0 1px var(--line);transition:background-color .2s ease,color .2s ease}
+.chips a[aria-current=true]{background:var(--morado);color:#fff;box-shadow:none}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.search{display:flex;align-items:center;gap:8px;flex:1 1 220px;min-width:0;height:42px;padding:0 14px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px var(--line)}
+.search svg{width:17px;height:17px;color:var(--muted);flex:none}
+.search input{border:0;outline:0;background:none;font:500 16px var(--sans);color:var(--ink);width:100%;min-width:0}
+.search:focus-within{box-shadow:0 0 0 2px var(--terra)}
+.ft{display:inline-flex;align-items:center;gap:7px;height:42px;padding:0 14px;border-radius:999px;border:0;background:var(--card);box-shadow:0 0 0 1px var(--line);font-weight:600;font-size:13.5px;color:var(--muted);cursor:pointer;transition:background-color .2s ease,color .2s ease}
+.ft[aria-pressed=true]{background:var(--ink);color:#fff;box-shadow:none}
+.ic-star{color:var(--terra)}
+.ft[aria-pressed=true] .ic-star{color:var(--ocre)}
+.ic-badge{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 4px;border-radius:10px;font-size:10px;font-weight:800;letter-spacing:.02em}
+.ic-badge.veg{background:#DCEBD9;color:#2F5D50}
+.ic-badge.gf{background:#F3E3C6;color:#8A5A0E}
+.mcat{padding-top:34px;scroll-margin-top:190px}
+.mcat>h3{display:flex;align-items:baseline;gap:12px;margin:0 0 6px;font:400 30px/1.1 var(--display);letter-spacing:-.015em;color:var(--morado)}
+.mcat>h3 small{font:600 13px var(--sans);color:var(--muted);letter-spacing:0}
+.mcat>p.sub{margin:0 0 10px;color:var(--muted);font-size:14.5px}
+.items{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+.it{display:grid;grid-template-columns:1fr auto;gap:4px 18px;padding:16px 0;border-bottom:1px dashed rgba(42,22,16,.18)}
+.it .nm{font-weight:700;font-size:16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.it .nm .ic-star{font-size:14px}
+.it .ds{grid-column:1;font-size:14px;color:var(--muted);line-height:1.45}
+.it .pr{grid-row:1/span 2;grid-column:2;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.it .sizes{display:flex;flex-direction:column;gap:3px;align-items:flex-end}
+.it .sizes span{font-weight:700}
+.it .sizes small{font-weight:500;color:var(--muted);font-size:12.5px;margin-right:6px}
+.it .go{grid-column:1;justify-self:start;font-size:13px;font-weight:700;color:var(--terra);text-decoration:none}
+.it.fav{position:relative}
+.xp{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.xp .card2{background:var(--morado);color:#F8EBC9;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.xp .card2 b{font:400 22px/1.1 var(--display);color:#fff;letter-spacing:-.01em}
+.xp .card2 p{margin:0;font-size:14.5px;color:#EBD3BE}
+.xp .card2 .pr{margin-top:auto;padding-top:10px;font-size:20px;font-weight:700;color:var(--ocre);font-variant-numeric:tabular-nums}
+.alc .it .nm::after{content:"+18";font-size:10px;font-weight:800;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+.empty-q{margin:28px 0 0;color:var(--muted)}
+.empty-q button{border:0;background:none;color:var(--terra);font-weight:700;cursor:pointer;text-decoration:underline;padding:0}
+.mnotes{display:flex;flex-wrap:wrap;gap:10px 32px;margin-top:34px;padding:18px 22px;border-radius:16px;background:var(--clay-2);font-size:14.5px}
+.mnotes p{margin:0}
+.mnotes a{color:var(--terra);font-weight:700}
+.hide{display:none!important}
+@media (max-width:820px){.items{grid-template-columns:1fr}.mtools{top:62px;padding:10px 0}.mcat{scroll-margin-top:170px}.chips{padding-bottom:8px}.chips a{padding:7px 12px;font-size:13.5px}.filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.search{flex:0 0 150px;height:38px}.ft{flex:none;height:38px;padding:0 12px;font-size:13px}}
+
+
+/* ---------- modo feed (rolagem vertical, um item por tela) ---------- */
+.feed-cta{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 20px 0 8px;border-radius:999px;border:0;background:var(--ink);color:#fff;font:700 15px var(--sans);cursor:pointer;transition:transform .12s var(--ease)}
+.feed-cta:active{transform:scale(.97)}
+.feed-cta i{width:34px;height:34px;border-radius:50%;background:var(--terra);display:grid;place-items:center;font-style:normal;font-size:13px}
+.feed{position:fixed;inset:0;z-index:60;background:#120906;color:#fff;display:flex;justify-content:center;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s .25s}
+.feed.open{opacity:1;visibility:visible;transition:opacity .25s ease}
+.feed-col{position:relative;width:100%;max-width:480px;height:100%;height:100dvh}
+@media (min-width:600px){.feed-col{box-shadow:0 0 0 1px rgba(255,255,255,.08),0 0 80px rgba(0,0,0,.6)}}
+.reel{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;overscroll-behavior:contain;scrollbar-width:none}
+.reel::-webkit-scrollbar{display:none}
+.slide{position:relative;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.slide .bg{position:absolute;inset:0}
+.slide .pat2{position:absolute;inset:0;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cpath d='M21 7h14v7h7v7h7v14h-7v7h-7v7H21v-7h-7v-7H7V21h7v-7h7z' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E");background-size:56px}
+.slide .hero-ic{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:min(72%,340px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#FFF8EC 0 62%,#F3E3C6 63%);display:grid;place-items:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+.slide .hero-ic::before{content:"";position:absolute;inset:6%;border-radius:50%;border:2px dashed rgba(99,41,22,.22)}
+.slide .hero-ic svg{width:56%;height:auto;filter:drop-shadow(0 10px 14px rgba(60,20,8,.25))}
+.slide.active .hero-ic svg{animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(-2deg)}}
+.slide .shade{position:absolute;inset:auto 0 0 0;height:60%;background:linear-gradient(to top,rgba(10,4,2,.85),rgba(10,4,2,0))}
+.slide .txt{position:relative;padding:0 88px calc(28px + env(safe-area-inset-bottom)) 20px}
+.slide .cat{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#FBE3C4;opacity:.9}
+.slide h3{margin:8px 0 8px;font:400 clamp(30px,8vw,40px)/1.02 var(--display);letter-spacing:-.02em;text-wrap:balance}
+.slide p{margin:0 0 14px;font-size:15.5px;line-height:1.45;color:#F3E2D2;max-width:30em}
+.slide .prices{display:flex;flex-wrap:wrap;gap:8px}
+.slide .prices span{background:rgba(255,250,240,.95);color:var(--ink);font-weight:800;font-size:15px;padding:7px 13px;border-radius:999px;font-variant-numeric:tabular-nums}
+.slide .prices small{font-weight:600;color:var(--muted);margin-right:6px;font-size:12.5px}
+.slide .tagrow{display:flex;gap:6px;margin:0 0 12px}
+.slide .tagrow span{font-size:11.5px;font-weight:800;padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.16)}
+.slide .tagrow .fav{background:var(--ocre);color:#2A1610}
+.rail{position:absolute;right:10px;bottom:calc(30px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:18px;align-items:center;z-index:2}
+.rail button,.rail a{width:54px;border:0;background:none;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px;font:700 12.5px var(--sans);cursor:pointer;text-decoration:none;font-variant-numeric:tabular-nums;padding:0}
+.rail .b{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);display:grid;place-items:center;transition:transform .15s var(--ease),background-color .2s ease}
+.rail button:active .b{transform:scale(.88)}
+.rail svg{width:26px;height:26px}
+.like[aria-pressed=true] .b{background:#fff}
+.like[aria-pressed=true] svg{fill:#E0303F;stroke:#E0303F}
+.like.pop .b{animation:pop .4s var(--ease)}
+@keyframes pop{40%{transform:scale(1.25)}}
+.burst{position:absolute;width:110px;height:110px;margin:-55px 0 0 -55px;pointer-events:none;z-index:3;animation:burst .8s var(--ease) forwards}
+.burst svg{width:100%;height:100%;fill:#E0303F;filter:drop-shadow(0 6px 16px rgba(0,0,0,.4))}
+@keyframes burst{0%{transform:scale(.3) rotate(-12deg);opacity:0}25%{transform:scale(1.1) rotate(-6deg);opacity:1}60%{transform:scale(1) rotate(-6deg);opacity:1}100%{transform:translateY(-70px) scale(.9) rotate(-6deg);opacity:0}}
+.ftop{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 12px 12px;background:linear-gradient(to bottom,rgba(10,4,2,.55),rgba(10,4,2,0));pointer-events:none}
+.ftop>*{pointer-events:auto}
+.ftop img{width:34px;height:34px}
+.ftop .tt{font-weight:800;font-size:15px;line-height:1.1}
+.ftop .tt small{display:block;font-weight:600;font-size:12px;opacity:.75;font-variant-numeric:tabular-nums}
+.ftop .sp{flex:1}
+.fbtn{height:40px;border-radius:999px;border:0;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);color:#fff;font:700 13.5px var(--sans);padding:0 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.fbtn.x{width:40px;padding:0;justify-content:center;font-size:22px}
+.fcats{position:absolute;top:calc(62px + env(safe-area-inset-top));left:0;right:0;z-index:4;display:flex;gap:6px;overflow-x:auto;padding:0 12px;scrollbar-width:none}
+.fcats::-webkit-scrollbar{display:none}
+.fcats button{flex:none;border:0;border-radius:999px;padding:7px 12px;font:700 12.5px var(--sans);background:rgba(255,255,255,.14);color:#fff;cursor:pointer;backdrop-filter:blur(6px)}
+.fcats button[aria-current=true]{background:#fff;color:var(--ink)}
+.hint{position:absolute;left:50%;top:calc(112px + env(safe-area-inset-top));transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:13px;font-weight:700;color:#fff;background:rgba(10,4,2,.55);backdrop-filter:blur(6px);padding:8px 14px;border-radius:999px;pointer-events:none;transition:opacity .3s ease}
+.hint svg{width:18px;height:18px;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(-4px)}}
+.hint.gone{opacity:0}
+.top-sheet{position:absolute;inset:auto 0 0 0;z-index:5;background:#FFFAF0;color:var(--ink);border-radius:20px 20px 0 0;padding:14px 18px calc(18px + env(safe-area-inset-bottom));max-height:75%;overflow:auto;transform:translateY(105%);transition:transform .35s var(--ease)}
+.top-sheet.open{transform:none}
+.top-sheet h4{margin:4px 0 4px;font:400 26px/1.1 var(--display);color:var(--morado)}
+.top-sheet .note{margin:0 0 10px;font-size:13px;color:var(--muted)}
+.top-sheet ol{list-style:none;margin:0;padding:0}
+.top-sheet li button{width:100%;display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;border:0;background:none;padding:12px 4px;border-bottom:1px solid var(--line);text-align:left;cursor:pointer;font:600 15px var(--sans);color:var(--ink)}
+.top-sheet li .r{font:400 20px var(--display);color:var(--terra)}
+.top-sheet li .c{font-weight:800;color:#C2263A;font-variant-numeric:tabular-nums}
+.top-sheet li small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.top-sheet .close{position:absolute;right:12px;top:10px;width:40px;height:40px;border-radius:50%;border:0;background:var(--clay-2);font-size:20px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.slide.active .hero-ic svg,.hint svg{animation:none}}
+
+
+.hero-pics{position:relative;aspect-ratio:1/1.05;max-width:520px;width:100%;justify-self:end}
+.hp{position:absolute;margin:0;overflow:hidden;border-radius:22px;box-shadow:0 30px 60px -28px rgba(60,20,8,.55);background:var(--clay-2)}
+.hp img{width:100%;height:100%;object-fit:cover;display:block}
+.hp.main{left:14%;top:0;width:66%;height:84%}
+.hp.main figcaption{position:absolute;right:12px;top:12px;background:rgba(255,250,240,.94);color:var(--ink);font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px}
+.hp.side{left:0;bottom:2%;width:38%;aspect-ratio:1;border-radius:50%;border:6px solid var(--clay)}
+.hp.side2{right:0;top:30%;width:34%;aspect-ratio:3/4;border:6px solid var(--clay);transform:rotate(4deg)}
+@media (max-width:900px){.hero-pics{max-width:420px;justify-self:center;order:-1}}
+.storefront{position:relative;margin:0;border-radius:20px;overflow:hidden;grid-row:span 2;min-height:520px}
+.storefront img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.storefront figcaption{position:absolute;left:16px;bottom:16px;background:rgba(255,250,240,.94);color:var(--ink);font-weight:700;font-size:14px;padding:8px 14px;border-radius:999px}
+.slide .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide.has-photo .hero-ic,.slide.has-photo .pat2{display:none}
+.slide.has-photo .shade{height:70%;background:linear-gradient(to top,rgba(10,4,2,.92),rgba(10,4,2,.35) 55%,rgba(10,4,2,0))}
+.slide .credit{position:absolute;top:calc(112px + env(safe-area-inset-top));right:12px;z-index:2;font-size:11px;font-weight:700;color:#fff;background:rgba(10,4,2,.45);padding:4px 9px;border-radius:999px}
+
+/* ---------- destaques (galeria) ---------- */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
+.tile{position:relative;border-radius:18px;overflow:hidden;background:var(--clay-2);margin:0;border:0;padding:0;cursor:default;text-align:left}
+.tile.big{grid-column:span 2;grid-row:span 2}
+.tile.wide{grid-column:span 2}
+.tile img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .5s var(--ease)}
+.tile.has-photo{cursor:zoom-in}
+@media (hover:hover){.tile.has-photo:hover img{transform:scale(1.04)}}
+.tile .art2{position:absolute;inset:0;display:grid;place-items:center}
+.tile .art2 svg{width:44%;max-width:180px;height:auto}
+.tile.big .art2 svg{width:40%;max-width:240px}
+.tile .pat{position:absolute;inset:0;opacity:.14;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M15 5h10v5h5v5h5v10h-5v5h-5v5H15v-5h-5v-5H5V15h5v-5h5z' fill='none' stroke='%23632916' stroke-width='2'/%3E%3C/svg%3E");background-size:40px}
+.tile figcaption{position:absolute;left:14px;bottom:14px;right:14px;display:flex;justify-content:space-between;align-items:end;gap:10px}
+.tile figcaption b{background:rgba(255,250,240,.92);color:var(--ink);font-size:14px;font-weight:700;padding:7px 12px;border-radius:999px}
+.tile figcaption small{font-size:11px;color:rgba(255,255,255,.85);text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.photo-note{margin:18px 0 0;font-size:14px;color:var(--muted)}
+@media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}.tile.big{grid-column:span 2;grid-row:span 2}.tile.wide{grid-column:span 2}}
+.lightbox{position:fixed;inset:0;z-index:50;background:rgba(20,10,6,.88);display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox img{max-width:min(1000px,100%);max-height:80vh;border-radius:12px}
+.lightbox p{color:#F3E3C9;text-align:center;margin:12px 0 0}
+.lightbox button{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;border:0;background:#F8EBC9;font-size:22px;cursor:pointer}
+
+/* ---------- avaliações e imprensa ---------- */
+.praise{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:16px}
+.quote{background:var(--card);border-radius:20px;padding:28px;box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column;gap:14px}
+.quote.feature{background:var(--morado);color:var(--cream);box-shadow:none}
+.quote .stars{color:var(--ocre);letter-spacing:2px;font-size:18px}
+.quote p{margin:0;font:400 20px/1.3 var(--display);letter-spacing:-.01em}
+.quote.feature p{font-size:26px;color:#fff}
+.quote .src{margin-top:auto;font-size:13.5px;color:var(--muted)}
+.quote.feature .src{color:#E9CDB3}
+.quote .src a{color:inherit}
+.score{display:flex;align-items:baseline;gap:10px}
+.score b{font:400 56px/1 var(--display);color:var(--morado)}
+@media (max-width:900px){.praise{grid-template-columns:1fr}}
+
+footer{padding:36px 0 48px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer a{text-decoration:none}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- emblema próprio inspirado na forma do tumi: lâmina em meia-lua com cabo escalonado -->
+  <symbol id="emblem" viewBox="0 0 64 64">
+    <path d="M24 6h16v6h-4v6h4v6H24v-6h4v-6h-4z" fill="#D99A2B"/>
+    <path d="M28 24h8v14h-8z" fill="#B4532A"/>
+    <path d="M10 40c0-2 2-3 4-3h36c2 0 4 1 4 3 0 9.9-9.9 18-22 18S10 49.9 10 40z" fill="currentColor"/>
+    <path d="M18 42h28" stroke="#D99A2B" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<div class="band" aria-hidden="true"></div>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#" aria-label="El Tumi Café, início"><img src="logo.png" alt="" width="44" height="44"><span><b>El Tumi</b><small>Café peruano</small></span></a>
+    <nav aria-label="Seções">
+      <a href="#mupeco">Mupeco</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#visite">Visite</a>
+    </nav>
+    <span class="status" data-status><span class="dot"></span>Ter a dom</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-label="Apresentação">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hola">¡Hola, vecino!</p>
+        <h1>Café especial com alma <em>peruana</em>, aqui no Bigorrilho.</h1>
+        <p class="lead">Cafés especiais filtrados na Mupeco, o método que mais ressalta a nossa torra, e sabores peruanos: salteña, alfajor, limeñito e mazamorra morada. Puxe uma cadeira.</p>
+        <div class="cta">
+          <button type="button" class="feed-cta" data-open-feed><i>▶</i>Cardápio em modo feed</button>
+          <a class="btn btn-o" href="#cardapio">Cardápio completo</a>
+          <a class="btn btn-o" data-map href="#" target="_blank" rel="noopener">Como chegar</a>
+        </div>
+        <div class="info-row">
+          <span><b>Alameda Augusto Stellfeld, 1281</b> · Bigorrilho</span>
+          <span data-hours-line>Ter a sáb 10h–18h · Dom 12h–18h</span>
+        </div>
+      </div>
+      <div class="hero-pics">
+        <figure class="hp main"><img src="fotos/mupeco-preparo.jpg" alt="Café sendo preparado no método Mupeco, com o copo de cerâmica sobre a jarra" width="820" height="1100" fetchpriority="high"><figcaption>Filtrado na Mupeco</figcaption></figure>
+        <figure class="hp side"><img src="fotos/cafe-com-laranja.jpg" alt="Café com laranja em copo alto" width="1100" height="1090"></figure>
+        <figure class="hp side2"><img src="fotos/alfajor-cafe.jpg" alt="Alfajor peruano com açúcar de confeiteiro e um café na xícara vermelha" width="785" height="1100"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="destaques" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="kick">Destaques</p><h2>O que faz a gente voltar.</h2></div>
+        <p>O Mupeco, os cafés especiais e os sabores peruanos, em fotos da casa. Toque numa foto para ampliar.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+      <p class="photo-note" id="photoNote"></p>
+    </div>
+  </section>
+
+  <section id="mupeco" class="mupeco">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="kick">O método</p><h2>Mupeco: o café passa pela cerâmica.</h2></div>
+        <p>Um copo de cerâmica sobre um vaso de barro, sem filtro de papel. O café fica com mais óleos naturais e mais corpo. Arraste para preparar uma xícara.</p>
+      </div>
+      <div class="lab">
+        <div class="rig">
+          <svg viewBox="0 0 400 400" role="img" aria-label="Ilustração do preparo no Mupeco: copo de cerâmica sobre o vaso de barro">
+            <defs>
+              <clipPath id="cone"><path d="M132 50H268L256 114H144Z"/></clipPath>
+              <clipPath id="win"><circle cx="200" cy="232" r="17"/></clipPath>
+              <clipPath id="cup"><path d="M285 300H365V340Q365 372 325 372Q285 372 285 340Z"/></clipPath>
+            </defs>
+  <rect x="120" y="36" width="160" height="12" rx="6" fill="#B5683A"/>
+  <path d="M128 44H272L258 118H142Z" fill="#C77A48"/>
+            <g clip-path="url(#cone)"><rect id="water" x="120" y="114" width="160" height="0" fill="#7A4022"/><rect id="grounds" x="120" y="102" width="160" height="14" fill="#4A2416"/></g>
+            <path d="M131 62H269L266 76H134Z" fill="#8E4A2A" opacity=".55"/>
+  <path d="M131 62H269L266 76H134Z" fill="#8E4A2A"/>
+  <path d="M140 69l8-5 8 5 8-5 8 5 8-5 8 5 8-5 8 5 8-5 8 5 8-5 8 5 8-5 8 5 8-5 8 5" fill="none" stroke="#F3E3C9" stroke-width="2"/>
+  <path d="M96 118H304V130H96Z" fill="#E0A33A"/>
+  <path d="M86 112h16v24H86zM298 112h16v24h-16z" fill="#E0A33A"/>
+            <g id="kettle" opacity="0"><path d="M300 4h50a10 10 0 0 1 10 10v20h-70V14a10 10 0 0 1 10-10z" fill="#D99A2B"/><path d="M290 22l-28 10" stroke="#D99A2B" stroke-width="7" stroke-linecap="round"/><path id="pour" d="M262 34v16" stroke="#B7DCEB" stroke-width="4" stroke-linecap="round" opacity="0"/></g>
+  <path d="M146 130H254C254 160 236 190 232 220C228 250 250 300 258 372H142C150 300 172 250 168 220C164 190 146 160 146 130Z" fill="#C4713F"/>
+  <path d="M146 130H254C254 142 251 152 247 162H153C149 152 146 142 146 130Z" fill="#B0602F"/>
+  <path d="M185 197H215V207H225V217H235V247H225V257H215V267H185V257H175V247H165V217H175V207H185Z" fill="none" stroke="#F3E3C9" stroke-width="5" stroke-linejoin="miter"/>
+  <text x="200" y="300" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="17" letter-spacing="3" fill="#F3E3C9">MUPECO</text>
+  <path d="M150 326H250L252 336H148Z" fill="#8E4A2A"/>
+  <path d="M154 346l10 0 0-8 10 0 0 8 10 0 0-8 10 0 0 8 10 0 0-8 10 0 0 8 10 0 0-8 10 0 0 8 10 0" fill="none" stroke="#F3E3C9" stroke-width="2.5"/>
+            <circle cx="200" cy="232" r="17" fill="#3A1E14"/>
+            <g clip-path="url(#win)"><rect id="level" x="180" y="250" width="40" height="0" fill="#7A4022"/></g>
+            <path d="M285 300H365V340Q365 372 325 372Q285 372 285 340Z" fill="#EDE3D3"/>
+            <g clip-path="url(#cup)"><rect id="coffee" x="280" y="372" width="90" height="80" fill="#4A2416"/><rect id="crema" x="280" y="372" width="90" height="5" fill="#B9773F" opacity="0"/></g>
+            <path d="M110 378H380" stroke="#D99A2B" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <div class="slider">
+            <label for="brew"><span>Preparo</span><b id="brewLabel">Arraste para começar</b></label>
+            <input id="brew" type="range" min="0" max="100" value="0" aria-describedby="brewLabel">
+          </div>
+        </div>
+        <div>
+          <ol class="stages" id="stages">
+            <li data-at="0"><span class="n">1</span><div><h3>Café no copo de cerâmica</h3><p>Grãos especiais moídos vão direto no copo de cerâmica, apoiado sobre o vaso de barro.</p></div></li>
+            <li data-at="22"><span class="n">2</span><div><h3>Água quente</h3><p>A água cobre o pó devagar e o café começa a se abrir.</p></div></li>
+            <li data-at="45"><span class="n">3</span><div><h3>Pela cerâmica</h3><p>Sem papel no meio: o café atravessa a cerâmica e desce para o vaso. Dá para ver subir pela janela.</p></div></li>
+            <li data-at="82"><span class="n">4</span><div><h3>Na xícara</h3><p>Servido do vaso de barro: mais óleos naturais do grão e um corpo mais encorpado.</p></div></li>
+          </ol>
+          <div class="compare">
+            <div class="seg" role="group" aria-label="Comparar filtros">
+              <button type="button" data-f="papel" aria-pressed="false">Filtro de papel</button>
+              <button type="button" data-f="mupeco" aria-pressed="true">Mupeco</button>
+            </div>
+            <div class="meter"><span>Óleos naturais</span><i id="mOil" style="--w:85%"></i></div>
+            <div class="meter"><span>Corpo</span><i id="mBody" style="--w:80%"></i></div>
+            <small>Comparação ilustrativa: o papel retém parte dos óleos do café; a cerâmica deixa passar.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cardapio">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="kick">Cardápio</p><h2>Do Peru para a nossa mesa.</h2></div>
+        <div><p style="margin:0 0 14px">O cardápio completo da casa. Filtre pelos favoritos, veganos e sem glúten, ou procure pelo nome.</p><button type="button" class="feed-cta" data-open-feed><i>▶</i>Ver em modo feed e curtir</button></div>
+      </div>
+      <div class="mtools">
+        <nav class="chips" id="chips" aria-label="Categorias do cardápio"></nav>
+        <div class="filters">
+          <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Buscar no cardápio" aria-label="Buscar no cardápio"></label>
+          <button type="button" class="ft" data-ft="fav" aria-pressed="false"><span class="ic-star" aria-hidden="true">★</span> Favoritos do Tumi</button>
+          <button type="button" class="ft" data-ft="veg" aria-pressed="false"><span class="ic-badge veg" aria-hidden="true">V</span> Vegano</button>
+          <button type="button" class="ft" data-ft="gf" aria-pressed="false"><span class="ic-badge gf" aria-hidden="true">SG</span> Sem glúten</button>
+        </div>
+      </div>
+      <div id="menuBody"></div>
+      <p class="empty-q" id="emptyQ" hidden>Nada encontrado com esse filtro. <button type="button" id="clearF">Limpar filtros</button></p>
+      <div class="mnotes">
+        <p><b>Troque seu leite integral por Naveia</b> sem custo adicional.</p>
+        <p>Gostou? <a data-review href="#" target="_blank" rel="noopener">Conte como foi sua experiência e nos avalie no Google.</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="avaliacoes" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="kick">Quem provou</p><h2>Avaliações e imprensa.</h2></div>
+        <p>O que já escreveram sobre o El Tumi. Toque na fonte para ler a matéria completa.</p>
+      </div>
+      <div class="praise" id="praise"></div>
+    </div>
+  </section>
+
+  <section id="historia" style="padding-top:20px">
+    <div class="wrap story">
+      <div>
+        <p class="kick">Nossa história</p>
+        <blockquote>A cultura peruana da família, encontrando o café especial de Curitiba.</blockquote>
+        <p class="who" style="margin-bottom:26px">Pooljon Benito e Clara Olstan, fundadores</p>
+        <p>O El Tumi nasceu de dois cunhados que quiseram juntar duas coisas que amam: as receitas e os costumes peruanos da família e a cena de cafés especiais de Curitiba.</p>
+        <p>O nome vem do <b>tumi</b>, a faca cerimonial que virou um dos símbolos mais conhecidos do Peru, usada como amuleto de boa sorte.</p>
+      </div>
+      <img class="logo-big" src="logo.png" alt="Logo do El Tumi Café" width="480" height="480" loading="lazy">
+    </div>
+  </section>
+
+  <section id="visite" class="visit-sec">
+    <div class="wrap">
+      <div class="sec-head"><div><p class="kick">Visite</p><h2>Na mesma rua, a poucos passos.</h2></div><p data-status-long></p></div>
+      <div class="visit">
+        <figure class="storefront"><img src="fotos/fachada-movimento.jpg" alt="Fachada vermelha do El Tumi Café com mesas na calçada" width="783" height="1100" loading="lazy"><figcaption>Alameda Augusto Stellfeld, 1281</figcaption></figure>
+        <div class="card">
+          <h3>El Tumi Café</h3>
+          <p class="a">Alameda Augusto Stellfeld, 1281 · Bigorrilho · Curitiba</p>
+          <div class="week" id="week"></div>
+          <div class="btns">
+            <a class="btn btn-m" data-map href="#" target="_blank" rel="noopener">Como chegar</a>
+            <a class="btn btn-o" data-ig href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg>
+              @eltumicafe
+            </a>
+          </div>
+        </div>
+        <div class="card neighbors">
+          <h3>¡Hola, vecino!</h3>
+          <p>Mora ou trabalha no Bigorrilho? Passa para um café da tarde. Siga a gente no Instagram para ver o que saiu do forno no dia.</p>
+          <a class="btn" data-ig href="#" target="_blank" rel="noopener">Seguir no Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<div class="feed" id="feed" role="dialog" aria-modal="true" aria-label="Cardápio em modo feed" inert>
+  <div class="feed-col">
+    <div class="ftop">
+      <img src="logo.png" alt="" width="34" height="34">
+      <span class="tt">Cardápio El Tumi<small id="fpos">1 / 1</small></span>
+      <span class="sp"></span>
+      <button type="button" class="fbtn" id="fTop">♥ Mais amados</button>
+      <button type="button" class="fbtn x" id="fClose" aria-label="Fechar modo feed">×</button>
+    </div>
+    <div class="fcats" id="fcats"></div>
+    <div class="reel" id="reel"></div>
+    <div class="hint" id="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>Deslize · toque 2× para curtir</div>
+    <div class="top-sheet" id="topSheet" aria-label="Mais amados">
+      <button type="button" class="close" id="topClose" aria-label="Fechar">×</button>
+      <h4>Os mais amados</h4>
+      <p class="note" id="topNote"></p>
+      <ol id="topList"></ol>
+    </div>
+  </div>
+</div>
+
+<div class="band" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <span>© <span data-year></span> El Tumi Café · Alameda Augusto Stellfeld, 1281 · Curitiba</span>
+    <a data-ig href="#" target="_blank" rel="noopener">Instagram @eltumicafe</a>
+  </div>
+</footer>
+
+<script>
+/* ========= EDITE AQUI ========= */
+const CONFIG = {
+  instagram: "eltumicafe",
+  // Curtidas compartilhadas entre todos os visitantes (contador gratuito, sem login).
+  // Deixe likesApi vazio ("") para guardar as curtidas só no aparelho de cada pessoa.
+  likesApi: "https://abacus.jasoncameron.dev",
+  likesNamespace: "eltumi-cafe-site",
+  mapQuery:  "El Tumi Café, Alameda Augusto Stellfeld, 1281, Curitiba",
+  // dia da semana: [abre, fecha] em minutos; null = fechado. 0=dom … 6=sáb
+  hours: {0:[12*60,18*60], 1:null, 2:[10*60,18*60], 3:[10*60,18*60], 4:[10*60,18*60], 5:[10*60,18*60], 6:[10*60,18*60]}
+};
+// Cardápio oficial do El Tumi. Preço: número, ou lista de [tamanho, preço].
+// tags: "fav" = Favoritos do Tumi (★) · "veg" = vegano · "gf" = sem glúten
+const MENU = [
+  {id:"cafes", name:"Cafés", items:[
+    {n:"Coado do dia", p:[["Pequeno 100ml",7],["Médio 180ml",9]]},
+    {n:"Espresso", d:"60ml", p:10},
+    {n:"Macchiato", d:"120ml", p:12},
+    {n:"Cappuccino", d:"180ml", p:14},
+    {n:"Latte", d:"280ml", p:18},
+    {n:"Mocha", p:[["200ml",16],["300ml",20]]},
+    {n:"Dulce de leche café", p:[["200ml",20],["300ml",24]]},
+    {n:"Café com rapadura andina", d:"Café com leite e rapadura", tags:["fav"], p:[["200ml",20],["300ml",24]]},
+    {n:"Filtrado na hora", d:"Aeropress, Koar, Prensa Francesa ou V60", p:[["200ml",15],["400ml",25]]},
+    {n:"Filtrado na Mupeco", d:"Método que mais ressalta nossa torra. Servido em 300ml", tags:["fav"], p:25, link:"#mupeco"}
+  ]},
+  {id:"gelados", name:"Cafés gelados", items:[
+    {n:"Latte", p:18},
+    {n:"Mocha", p:20},
+    {n:"Dulce de leche café", p:24},
+    {n:"Café com rapadura andina", p:24},
+    {n:"Café com laranja", p:25},
+    {n:"Cold brew", p:15},
+    {n:"Cold tônica", p:22},
+    {n:"Espresso tônica", p:22},
+    {n:"Refresco de café", d:"Cold brew, suco de limão e xarope de frutas", tags:["fav"], p:25},
+    {n:"Espresso chancaca", d:"Espresso, água tônica e rapadura andina", p:25}
+  ]},
+  {id:"semcafe", name:"Sem café", items:[
+    {n:"Chocolate", p:[["Quente 200ml",13],["Gelado 300ml",17]]},
+    {n:"Leche dulce", p:[["Quente 200ml",13],["Gelado 300ml",17]]},
+    {n:"Té", p:[["200ml",15],["300ml",20]]},
+    {n:"Mate com leche", d:"Quente 200ml | Gelado 300ml", p:19},
+    {n:"Matcha del sol", d:"Matcha, suco de laranja e água tônica", p:30},
+    {n:"Mate gelado", p:18},
+    {n:"Inka soda", d:"Água com gás e xarope de frutas amarelas", p:15},
+    {n:"Chicha soda", d:"Água com gás e xarope de milho roxo", tags:["fav"], p:17},
+    {n:"Suco de laranja", p:9}
+  ]},
+  {id:"salgados", name:"Salgados", items:[
+    {n:"Pão de queijo", tags:["gf"], p:5},
+    {n:"3 pães de queijo", tags:["gf"], p:12},
+    {n:"Pães tostados com manteiga", p:15},
+    {n:"Salteña", d:"Carne, queijo ou palmito", tags:["fav"], p:15},
+    {n:"Queijo quente vegano", tags:["veg"], p:25},
+    {n:"Sanduba relleno", d:"Sanduíche inspirado na ‘causa limeña’, feito com pão de abóbora e recheado com frango, maionese e legumes", p:30}
+  ]},
+  {id:"postres", name:"Postres", sub:"doces", items:[
+    {n:"Brigadeiro", p:6},
+    {n:"Limeñito", d:"Creme limeño com toque de limão e canela", tags:["gf"], p:9},
+    {n:"Queque", d:"Bolo simples. Verificar sabor do dia", p:10},
+    {n:"Alfajor peruano", tags:["fav"], p:11},
+    {n:"Mazamorra morada", d:"Sobremesa cremosa e típica peruana. Feita com milho roxo, frutas e especiarias", tags:["veg"], p:15},
+    {n:"Turrón Doña Clorinda", d:"Camadas de biscoitos e xarope de frutas, finalizado com confeitos", p:15},
+    {n:"Torta helada", d:"Servida em aniversários, à base de pão de ló, mousse e gelatina de frutas", p:20}
+  ]},
+  {id:"experiencias", name:"Experiências", xp:true, items:[
+    {n:"Mini degustação", d:"Sente-se no balcão ou sofá e prove os nossos 3 cafés. Servido 100ml por café", p:36},
+    {n:"Tumi descafeinado", d:"Salteña, queque, leche dulce ou chocolate quente/gelado", p:36},
+    {n:"Pausa del Tumi", d:"Salteña, alfajor e dulce de leche médio", p:40},
+    {n:"Café de la mamita", d:"Turrón Doña Clorinda e filtrado na Mupeco (300ml)", p:35},
+    {n:"Brazuca", d:"3 pães de queijo, brigadeiro e mocha médio", p:30}
+  ]},
+  {id:"alcoolicos", name:"Alcoólicos", alc:true, items:[
+    {n:"El Ahogado", d:"Espresso, rum e limeñito", p:20},
+    {n:"Peru Libre", d:"Milho roxo, rum e água com gás", p:25},
+    {n:"Café, Campari y naranja", p:30},
+    {n:"Caña negra", d:"Espresso, rum, água tônica e rapadura andina", p:38},
+    {n:"Tropical brew", d:"Cold brew, rum, xarope de frutas e suco de limão", p:38},
+    {n:"Verano verde", d:"Matcha, rum, água tônica e suco de laranja", p:50},
+    {n:"Xeque Martin", d:"Mate, rum, xarope de frutas e suco de limão", p:50},
+    {n:"Inka sour", d:"Frutas amarelas, pisco, água com gás e suco de limão", tags:["fav"], p:60}
+  ]}
+];
+
+/* Fotos: coloque os arquivos na pasta do site e preencha "src" (ex.: "fotos/mupeco.jpg").
+   Sem foto, o quadro mostra a ilustração. Use só fotos do próprio El Tumi ou com autorização. */
+const PHOTOS = [
+  {key:"mupeco",   title:"O Mupeco",            size:"big",  src:"fotos/mupeco.jpg", pos:"50% 35%"},
+  {key:"cafe",     title:"Cafés especiais",      size:"",     src:"fotos/xicara.jpg"},
+  {key:"alfajor",  title:"Alfajor peruano",      size:"",     src:"fotos/alfajor-mao.jpg"},
+  {key:"inka",     title:"Inka soda",            size:"",     src:"fotos/inka-soda.jpg"},
+  {key:"gelado",   title:"Cafés gelados",        size:"",     src:"fotos/cafe-gelado.jpg"},
+  {key:"balcao",   title:"No balcão",            size:"wide", src:"fotos/balcao.jpg"},
+  {key:"laranja",  title:"Café com laranja",     size:"wide", src:"fotos/cafe-com-laranja.jpg"}
+];
+/* Avaliações: só textos reais, com a fonte. Para avaliações do Google, copie o texto e o primeiro nome. */
+const PRAISE = [
+  {feature:true, text:"O Mupeco é o destaque da casa: uma experiência diferente até para quem já conhece prensa francesa e V60.",
+   source:"Mural do Paraná", url:"https://muraldoparana.com.br/vai-bem-com-cafe-dois-cafes-especiais-para-sair-do-obvio/", kind:"resumo da matéria"},
+  {text:"Degustação de três cafés especiais preparados em método peruano inédito no Brasil.",
+   source:"Bem Paraná", url:"https://www.bemparana.com.br/bem-estar/gastronomia/festival-em-curitiba-tem-degustacao-de-cafe-com-tecnica-peruana-exclusiva/", kind:"imprensa"},
+  {score:"5,0", text:"Avaliação da comunidade elogiando a experiência de provar o método peruano Mupeco.",
+   source:"Kafex", url:"https://kafex.com.br/cafeterias/brasil/parana/curitiba/el-tumi-cafe", kind:"guia de cafés especiais"}
+];
+/* ============================== */
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+$$("[data-map]").forEach(a=>a.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(CONFIG.mapQuery));
+$$("[data-ig]").forEach(a=>a.href="https://instagram.com/"+CONFIG.instagram);
+$$("[data-year]").forEach(e=>e.textContent=new Date().getFullYear());
+
+/* ---------- horário (fuso de Curitiba) ---------- */
+const D=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"], DL=["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
+const h=m=>(m%60? `${Math.floor(m/60)}h${String(m%60).padStart(2,"0")}` : `${m/60}h`);
+function now(){const p=Object.fromEntries(new Intl.DateTimeFormat("en-US",{timeZone:"America/Sao_Paulo",weekday:"short",hour:"numeric",minute:"numeric",hourCycle:"h23"}).formatToParts(new Date()).map(x=>[x.type,x.value]));return{d:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(p.weekday),m:(+p.hour)*60+(+p.minute)}}
+(function(){
+  const n=now(), t=CONFIG.hours[n.d], open=t&&n.m>=t[0]&&n.m<t[1];
+  let msg;
+  if(open) msg=`<span class="dot on"></span>Aberto · até ${h(t[1])}`;
+  else{
+    for(let i=0;i<8;i++){const d=(n.d+i)%7, x=CONFIG.hours[d]; if(x&&(i>0||n.m<x[0])){msg=`<span class="dot"></span>Fechado · abre ${i===0?"hoje":i===1?"amanhã":DL[d]} às ${h(x[0])}`;break;}}
+  }
+  $$("[data-status]").forEach(e=>e.innerHTML=msg);
+  $("[data-status-long]").innerHTML = (open?"Estamos abertos agora. ":"")+"Passe para um café: a gente fica na Alameda Augusto Stellfeld, no Bigorrilho.";
+  $("#week").innerHTML=[1,2,3,4,5,6,0].map(d=>{const x=CONFIG.hours[d];return`<div class="day ${x?"":"off"} ${d===n.d?"today":""}"><b>${D[d]}</b>${x?`${h(x[0])}<br>${h(x[1])}`:"Fechado"}</div>`}).join("");
+})();
+
+/* ---------- cardápio com abas ---------- */
+const ICONS={
+  cocktail:'<path d="M5 5h20l-10 11z" fill="#F3E3C6" stroke="#F8EBC9" stroke-width="1.2"/><path d="M8 8h14l-7 7.5z" fill="#E8892B"/><path d="M15 16v8M10 25h10" stroke="#F8EBC9" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="6" r="3" fill="#C7DA5B"/>',
+  soda:'<path d="M10 5h10l-1 20h-8z" fill="#F4ECE1" stroke="#632916" stroke-width="1.5"/><path d="M10.6 12h8.8l-.7 12.5h-7.4z" fill="#56285B"/><circle cx="14" cy="17" r="1" fill="#fff"/><circle cx="16.5" cy="20" r=".8" fill="#fff"/><path d="M17 5l3-3" stroke="#B4532A" stroke-width="1.6" stroke-linecap="round"/>',
+  sandwich:'<path d="M4 13c0-4 5-7 11-7s11 3 11 7z" fill="#D99A2B"/><path d="M4 14h22l-1 3H5z" fill="#8FB35A"/><path d="M5 17h20l-1 2H6z" fill="#F3E3C6"/><path d="M4 19h22v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="#C98A47"/>',
+  cake:'<path d="M5 14h20v10H5z" fill="#F3E3C6"/><path d="M5 14h20v4H5z" fill="#E0303F" opacity=".75"/><path d="M5 12c0-3 4-5 10-5s10 2 10 5v2H5z" fill="#F6DCCB"/><circle cx="15" cy="6" r="1.6" fill="#E0303F"/>',
+  choc:'<path d="M7 9h14l-2 16H9z" fill="#F4ECE1" stroke="#632916" stroke-width="1.5"/><path d="M7.8 14h12.4l-1.3 10.4H9.1z" fill="#3A1E14"/><path d="M11 3c-1 2 1 3 0 5M15 3c-1 2 1 3 0 5" stroke="#B4532A" stroke-width="1.4" fill="none" stroke-linecap="round"/>',
+  orange:'<path d="M8 6h14l-2 19H10z" fill="#F4ECE1" stroke="#632916" stroke-width="2"/><path d="M9 13h12l-1.3 11h-9.4z" fill="#5A2E1E"/><circle cx="22" cy="9" r="5" fill="#E8892B"/><path d="M22 4v10M17 9h10" stroke="#F6C27A" stroke-width="1"/>',
+  mupeco:'<path d="M8 3h14l-2 7H10z" fill="#C77A48"/><path d="M5 10h20v2H5z" fill="#E0A33A"/><path d="M10 12h10c0 4-2 6-2 8s2 4 2 8H10c0-4 2-6 2-8s-2-4-2-8z" fill="#C4713F"/><path d="M13 17h4v2h1v2h-1v2h-4v-2h-1v-2h1z" fill="none" stroke="#F3E3C9" stroke-width=".9"/>',
+  cup:'<path d="M5 10h16v5a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6z" fill="#632916"/><path d="M21 12h2a3 3 0 0 1 0 6h-2" stroke="#632916" stroke-width="2" fill="none"/><path d="M9 4c-1 2 1 3 0 5M13 4c-1 2 1 3 0 5M17 4c-1 2 1 3 0 5" stroke="#B4532A" stroke-width="1.6" fill="none" stroke-linecap="round"/>',
+  three:'<path d="M2 14h7v4a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3zM11 11h7v7a3 3 0 0 1-3 3h-1a3 3 0 0 1-3-3zM20 14h7v4a3 3 0 0 1-3 3h-1a3 3 0 0 1-3-3z" fill="#632916"/><path d="M5 9v3M14.5 6v3M23.5 9v3" stroke="#B4532A" stroke-width="1.6" stroke-linecap="round"/>',
+  milk:'<path d="M7 8h14l-2 15H9z" fill="#F4ECE1" stroke="#632916" stroke-width="2"/><path d="M8 13h12l-1.3 10H9.3z" fill="#B9773F"/><rect x="22" y="15" width="6" height="6" rx="1" fill="#B4532A"/>',
+  ice:'<path d="M8 6h14l-2 19H10z" fill="#DCEBF0" stroke="#2F5D50" stroke-width="2"/><path d="M9 14h12l-1.2 10h-9.6z" fill="#5A2E1E"/><circle cx="22" cy="8" r="4" fill="#C7DA5B" stroke="#2F5D50" stroke-width="1.5"/>',
+  bowl:'<path d="M3 13h24a12 10 0 0 1-24 0z" fill="#56285B"/><path d="M3 13h24" stroke="#3B1A3F" stroke-width="2"/><circle cx="11" cy="11" r="2" fill="#D99A2B"/><circle cx="17" cy="10" r="2" fill="#B4532A"/><circle cx="21" cy="12" r="1.6" fill="#D99A2B"/>',
+  alfajor:'<ellipse cx="15" cy="10" rx="11" ry="4" fill="#F4ECE1" stroke="#B9773F" stroke-width="1.5"/><rect x="4" y="12" width="22" height="4" fill="#9A5B2A"/><ellipse cx="15" cy="18" rx="11" ry="4" fill="#F4ECE1" stroke="#B9773F" stroke-width="1.5"/><circle cx="11" cy="9" r=".8" fill="#fff"/><circle cx="18" cy="10" r=".8" fill="#fff"/>',
+  star:'<path d="M15 3l3.5 7.5 8 1-6 5.5 1.6 8L15 21l-7.1 4 1.6-8-6-5.5 8-1z" fill="#D99A2B"/>',
+  empanada:'<path d="M3 20a12 12 0 0 1 24 0z" fill="#D99A2B"/><path d="M4 20c2-2 4 2 6 0s4 2 6 0 4 2 6 0 4 2 4 0" stroke="#9A5B2A" stroke-width="1.6" fill="none"/>',
+  bread:'<path d="M4 14a11 7 0 0 1 22 0v8H4z" fill="#C98A47"/><path d="M10 10l-2 6M15 9v7M20 10l2 6" stroke="#F4ECE1" stroke-width="1.6" stroke-linecap="round"/>'
+};
+const BRL0=v=>"R$ "+String(v).replace(".",",");
+const badge=tg=>(tg||[]).map(x=>x==="fav"?'<span class="ic-star" title="Favorito do Tumi" aria-label="Favorito do Tumi">★</span>':x==="veg"?'<span class="ic-badge veg" title="Vegano">V</span>':'<span class="ic-badge gf" title="Sem glúten">SG</span>').join("");
+const price=x=>Array.isArray(x.p)?`<span class="sizes">${x.p.map(([l,v])=>`<span><small>${l}</small>${BRL0(v)}</span>`).join("")}</span>`:BRL0(x.p);
+$("#chips").innerHTML=MENU.map((c,i)=>`<a href="#cat-${c.id}" aria-current="${i===0}">${c.name}</a>`).join("");
+$("#menuBody").innerHTML=MENU.map(c=>`
+  <div class="mcat ${c.alc?"alc":""}" id="cat-${c.id}" data-cat="${c.id}">
+    <h3>${c.name}${c.sub?` <small>${c.sub}</small>`:""}</h3>
+    ${c.xp?`<p class="sub">Combinações da casa para provar sem pressa.</p><div class="xp">${c.items.map(x=>`<article class="card2 it2" data-s="${(x.n+" "+(x.d||"")).toLowerCase()}" data-tags=""><b>${x.n}</b><p>${x.d}</p><span class="pr">${BRL0(x.p)}</span></article>`).join("")}</div>`
+    :`<div class="items">${c.items.map(x=>`
+      <div class="it ${(x.tags||[]).includes("fav")?"fav":""}" data-s="${(x.n+" "+(x.d||"")).toLowerCase()}" data-tags="${(x.tags||[]).join(" ")}">
+        <span class="nm">${x.n} ${badge(x.tags)}</span>
+        ${x.d?`<span class="ds">${x.d}</span>`:""}
+        ${x.link?`<a class="go" href="${x.link}">Ver como é feito →</a>`:""}
+        <span class="pr">${price(x)}</span>
+      </div>`).join("")}</div>`}
+  </div>`).join("");
+$$("[data-review]").forEach(a=>a.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(CONFIG.mapQuery));
+
+// filtros e busca
+const F=new Set(); const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+function applyF(){
+  const q=norm($("#q").value.trim()); let shown=0;
+  $$("#menuBody .it, #menuBody .it2").forEach(el=>{
+    const tags=el.dataset.tags.split(" "); const okT=[...F].every(f=>tags.includes(f)); const okQ=!q||norm(el.dataset.s).includes(q);
+    el.classList.toggle("hide",!(okT&&okQ)); if(okT&&okQ) shown++;
+  });
+  $$(".mcat").forEach(c=>c.classList.toggle("hide",!c.querySelector(".it:not(.hide), .it2:not(.hide)")));
+  $("#emptyQ").hidden=shown>0;
+}
+$$(".ft").forEach(b=>b.addEventListener("click",()=>{ const f=b.dataset.ft; F.has(f)?F.delete(f):F.add(f); b.setAttribute("aria-pressed",F.has(f)); applyF(); }));
+$("#q").addEventListener("input",applyF);
+$("#clearF").addEventListener("click",()=>{ F.clear(); $$(".ft").forEach(b=>b.setAttribute("aria-pressed","false")); $("#q").value=""; applyF(); });
+// categoria ativa conforme a rolagem
+const chipFor=id=>$(`#chips a[href="#cat-${id}"]`);
+const spy=new IntersectionObserver(es=>{ es.forEach(e=>{ if(e.isIntersecting){ $$("#chips a").forEach(a=>a.setAttribute("aria-current","false")); const a=chipFor(e.target.dataset.cat); a.setAttribute("aria-current","true"); const box=$("#chips"); box.scrollTo({left:a.offsetLeft-box.clientWidth/2+a.clientWidth/2,behavior:reduce?"auto":"smooth"}); } }); },{rootMargin:"-40% 0px -55% 0px"});
+$$(".mcat").forEach(c=>spy.observe(c));
+
+/* ---------- Mupeco interativo ---------- */
+const brew=$("#brew"), lbl=$("#brewLabel"), stages=$$("#stages li");
+const set=(id,attrs)=>{const el=document.getElementById(id); for(const k in attrs) el.setAttribute(k,attrs[k]);};
+function draw(v){
+  brew.style.setProperty("--p",v+"%");
+  const inFilter = v<22 ? 0 : v<50 ? (v-22)/28 : Math.max(0,1-(v-50)/35);
+  const vase = v<35 ? 0 : Math.min(1,(v-35)/45) * (v>85 ? 1-(v-85)/30 : 1);
+  const cup = v<82 ? 0 : Math.min(1,(v-82)/16);
+  set("kettle",{opacity: v>12 && v<52 ? 1 : 0});
+  set("pour",{opacity: v>18 && v<50 ? 1 : 0});
+  set("water",{y:114-inFilter*58, height:inFilter*58});
+  set("grounds",{opacity: v>70 ? .9 : 1});
+  set("level",{y:250-vase*34, height:vase*34});
+  set("coffee",{y:370-cup*64});
+  set("crema",{y:370-cup*64, opacity: cup>.05?.8:0});
+  const active = stages.reduce((a,li,i)=> v>=+li.dataset.at ? i : a, 0);
+  stages.forEach((li,i)=>li.classList.toggle("on",i===active));
+  lbl.textContent = v===0 ? "Arraste para começar" : v>=97 ? "Pronto. Bom café!" : ["Café moído","Água quente","Descendo para o vaso","Servindo"][active];
+}
+brew.addEventListener("input",()=>draw(+brew.value));
+stages.forEach(li=>li.addEventListener("click",()=>{ animateTo(Math.min(100,+li.dataset.at+12)); }));
+let raf; function animateTo(t){ cancelAnimationFrame(raf); if(reduce){brew.value=t;draw(t);return;} const s=+brew.value,st=performance.now(),d=700;
+  const step=x=>{const k=Math.min(1,(x-st)/d), e=1-Math.pow(1-k,3), v=Math.round(s+(t-s)*e); brew.value=v; draw(v); if(k<1) raf=requestAnimationFrame(step);}; raf=requestAnimationFrame(step); }
+draw(0);
+// prepara sozinho uma vez quando a seção aparece (só se a pessoa ainda não mexeu)
+let touched=false; brew.addEventListener("pointerdown",()=>touched=true,{once:true});
+new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ o.disconnect(); setTimeout(()=>{ if(!touched && +brew.value===0) animateTo(100); },400);} },{threshold:.5}).observe($(".rig"));
+// comparação papel × Mupeco
+$$("[data-f]").forEach(b=>b.addEventListener("click",()=>{
+  $$("[data-f]").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  const m=b.dataset.f==="mupeco"; $("#mOil").style.setProperty("--w",m?"85%":"40%"); $("#mBody").style.setProperty("--w",m?"80%":"50%");
+}));
+
+
+
+/* ---------- modo feed ---------- */
+const CATSTYLE={cafes:["#632916","#3A1A0E","cup"],gelados:["#2E4B57","#16262D","ice"],semcafe:["#5A3A63","#2C1B33","choc"],salgados:["#8A4A1E","#3F200C","empanada"],postres:["#7A2E3A","#3A141B","alfajor"],experiencias:["#3A2416","#1A0F09","three"],alcoolicos:["#1F3A33","#0E1C18","cocktail"]};
+const ITEMICON={"Filtrado na Mupeco":"mupeco","Café com laranja":"orange","Mazamorra morada":"bowl","Alfajor peruano":"alfajor","Limeñito":"star","Salteña":"empanada","Pães tostados com manteiga":"bread","Pão de queijo":"bread","3 pães de queijo":"bread","Sanduba relleno":"sandwich","Queijo quente vegano":"sandwich","Inka soda":"ice","Chicha soda":"soda","Suco de laranja":"orange","Leche dulce":"milk","Mate com leche":"milk","Café com rapadura andina":"milk","Dulce de leche café":"milk","Torta helada":"cake","Queque":"cake","Brigadeiro":"choc","Turrón Doña Clorinda":"cake","Mini degustação":"three","Peru Libre":"soda"};
+const ITEMPHOTO={"Filtrado na Mupeco":"fotos/mupeco-preparo.jpg","Café com laranja":"fotos/cafe-com-laranja.jpg","Inka soda":"fotos/inka-soda.jpg","Alfajor peruano":"fotos/alfajor-cafe.jpg","Pausa del Tumi":"fotos/alfajor-mao.jpg"};
+const slug=s=>norm(s).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const FEED=MENU.flatMap(c=>c.items.map(x=>({...x,cat:c.name,catId:c.id,id:c.id+"-"+slug(x.n)})));
+const LKEY="eltumi-likes-v1"; const mine=new Set(JSON.parse(localStorage.getItem(LKEY)||"[]"));
+const SENT="eltumi-likes-sent-v1"; const sent=new Set(JSON.parse(localStorage.getItem(SENT)||"[]"));
+const counts={}; let apiOk=!!CONFIG.likesApi;
+const saveMine=()=>localStorage.setItem(LKEY,JSON.stringify([...mine]));
+const api=(op,id)=>fetch(`${CONFIG.likesApi}/${op}/${CONFIG.likesNamespace}/${id}`).then(r=>r.status===404?{value:0}:r.ok?r.json():Promise.reject(r.status)).then(j=>+j.value||0);
+const shown=id=>apiOk? Math.max(counts[id]||0, mine.has(id)?1:0) : (mine.has(id)?1:0);
+function fmt(n){ return n>=1000? (n/1000).toFixed(1).replace(".",",")+" mil" : String(n); }
+const pricesHTML=x=>Array.isArray(x.p)? x.p.map(([l,v])=>`<span><small>${l}</small>${BRL0(v)}</span>`).join("") : `<span>${BRL0(x.p)}</span>`;
+$("#reel").innerHTML=FEED.map((x,i)=>{ const [c1,c2,ic]=CATSTYLE[x.catId]; const icon=ITEMICON[x.n]||ic; const tg=x.tags||[];
+  const ph=ITEMPHOTO[x.n];
+  return `<section class="slide ${ph?"has-photo":""}" data-i="${i}" id="f-${x.id}" aria-label="${x.n}, ${i+1} de ${FEED.length}">
+    <div class="bg" style="background:radial-gradient(120% 80% at 50% 30%,${c1},${c2})"></div><div class="pat2"></div>
+    ${ph?`<img class="photo" src="${ph}" alt="${x.n}" loading="lazy" draggable="false">`:""}
+    <div class="hero-ic"><svg viewBox="0 0 30 30" aria-hidden="true">${ICONS[icon]}</svg></div>
+    <div class="shade"></div>
+    <div class="txt">
+      <span class="cat">${x.cat}</span>
+      <h3>${x.n}</h3>
+      ${tg.length?`<div class="tagrow">${tg.map(g=>g==="fav"?'<span class="fav">★ Favorito do Tumi</span>':g==="veg"?'<span>Vegano</span>':'<span>Sem glúten</span>').join("")}</div>`:""}
+      ${x.d?`<p>${x.d}</p>`:""}
+      <div class="prices">${pricesHTML(x)}</div>
+    </div>
+    <div class="rail">
+      <button type="button" class="like" data-like="${x.id}" aria-pressed="${mine.has(x.id)}" aria-label="Curtir ${x.n}"><span class="b"></span><span class="n" data-n="${x.id}">${fmt(shown(x.id))}</span></button>
+      <button type="button" data-share="${i}" aria-label="Compartilhar ${x.n}"><span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></svg></span>Enviar</button>
+      ${x.link?`<button type="button" data-goto-mupeco aria-label="Ver como é feito na Mupeco"><span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg></span>Como é</button>`:""}
+    </div>
+  </section>`; }).join("");
+$$("#reel .like .b").forEach(b=>b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9.2C1.4 7.6 3.5 4.5 6.8 4.5c2 0 3.4 1.1 4.2 2.4h2c.8-1.3 2.2-2.4 4.2-2.4 3.3 0 5.4 3.1 4.1 6.3C19.5 15.4 12 20 12 20z"/></svg>`);
+$("#fcats").innerHTML=MENU.map(c=>`<button type="button" data-fcat="${c.id}">${c.name}</button>`).join("");
+
+const feed=$("#feed"), reel=$("#reel"); let cur=0, lastF;
+function updLike(id){ $$(`[data-like="${id}"]`).forEach(b=>b.setAttribute("aria-pressed",mine.has(id))); $$(`[data-n="${id}"]`).forEach(n=>n.textContent=fmt(shown(id))); }
+function like(id, force){
+  const on = force ?? !mine.has(id);
+  if(on) mine.add(id); else mine.delete(id); saveMine();
+  if(on && apiOk && !sent.has(id)){ sent.add(id); localStorage.setItem(SENT,JSON.stringify([...sent])); counts[id]=(counts[id]||0)+1; updLike(id);
+    api("hit",id).then(v=>{counts[id]=v; updLike(id);}).catch(()=>{}); }
+  updLike(id);
+  const b=$(`[data-like="${id}"]`); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop");
+}
+function loadCount(id){ if(!apiOk || counts[id]!==undefined) return; counts[id]=counts[id]||0; api("get",id).then(v=>{counts[id]=v; updLike(id);}).catch(()=>{ apiOk=false; FEED.forEach(f=>updLike(f.id)); }); }
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const i=+e.target.dataset.i; cur=i; $$(".slide").forEach(s=>s.classList.toggle("active",s===e.target));
+  $("#fpos").textContent=`${i+1} / ${FEED.length}`; const c=FEED[i].catId; $$("#fcats button").forEach(b=>{ const on=b.dataset.fcat===c; b.setAttribute("aria-current",on); if(on) b.scrollIntoView({inline:"center",block:"nearest"}); });
+  loadCount(FEED[i].id); if(FEED[i+1]) loadCount(FEED[i+1].id); if(i>0) $("#hint").classList.add("gone");
+  history.replaceState(null,"","#feed="+FEED[i].id); } }),{root:reel,threshold:.6});
+$$(".slide").forEach(s=>io.observe(s));
+const go=i=>{ i=Math.max(0,Math.min(FEED.length-1,i)); reel.children[i].scrollIntoView({behavior:reduce?"auto":"smooth"}); };
+function openFeed(id){ lastF=document.activeElement; feed.removeAttribute("inert"); feed.classList.add("open"); document.documentElement.style.overflow="hidden";
+  const i=Math.max(0,FEED.findIndex(f=>f.id===id)); reel.children[i].scrollIntoView(); setTimeout(()=>$("#fClose").focus({preventScroll:true}),50); }
+function closeFeed(){ feed.classList.remove("open"); feed.setAttribute("inert",""); document.documentElement.style.overflow=""; $("#topSheet").classList.remove("open"); history.replaceState(null,"",location.pathname+location.search); lastF&&lastF.focus&&lastF.focus({preventScroll:true}); }
+$$("[data-open-feed]").forEach(b=>b.addEventListener("click",()=>openFeed()));
+$("#fClose").onclick=closeFeed;
+$("#fcats").addEventListener("click",e=>{ const b=e.target.closest("[data-fcat]"); if(b) go(FEED.findIndex(f=>f.catId===b.dataset.fcat)); });
+reel.addEventListener("click",e=>{
+  const lb=e.target.closest("[data-like]"); if(lb){ like(lb.dataset.like); return; }
+  const sb=e.target.closest("[data-share]"); if(sb){ const x=FEED[+sb.dataset.share]; const url=location.href.split("#")[0]+"#feed="+x.id; const text=`${x.n} no El Tumi Café`;
+    if(navigator.share) navigator.share({title:text,text,url}).catch(()=>{}); else navigator.clipboard?.writeText(url).then(()=>flash("Link copiado")); return; }
+  if(e.target.closest("[data-goto-mupeco]")){ closeFeed(); document.getElementById("mupeco").scrollIntoView(); return; }
+});
+// toque duplo para curtir, com coração no lugar do toque
+let lastTap=0;
+reel.addEventListener("pointerup",e=>{ if(e.target.closest(".rail")) return; const now=Date.now(); if(now-lastTap<300){ const s=e.target.closest(".slide"); if(!s) return; const id=FEED[+s.dataset.i].id; like(id,true);
+    const r=s.getBoundingClientRect(), h=document.createElement("div"); h.className="burst"; h.style.left=(e.clientX-r.left)+"px"; h.style.top=(e.clientY-r.top)+"px"; h.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9.2C1.4 7.6 3.5 4.5 6.8 4.5c2 0 3.4 1.1 4.2 2.4h2c.8-1.3 2.2-2.4 4.2-2.4 3.3 0 5.4 3.1 4.1 6.3C19.5 15.4 12 20 12 20z"/></svg>`; s.appendChild(h); setTimeout(()=>h.remove(),850); lastTap=0; } else lastTap=now; });
+document.addEventListener("keydown",e=>{ if(!feed.classList.contains("open")) return;
+  if(e.key==="Escape"){ $("#topSheet").classList.contains("open")? $("#topSheet").classList.remove("open") : closeFeed(); }
+  if(e.key==="ArrowDown"||e.key==="j"){ e.preventDefault(); go(cur+1); } if(e.key==="ArrowUp"||e.key==="k"){ e.preventDefault(); go(cur-1); }
+  if(e.key==="l"&&!e.target.closest("input")) like(FEED[cur].id); });
+// mais amados
+$("#fTop").onclick=async()=>{ const sh=$("#topSheet"); sh.classList.add("open");
+  $("#topNote").textContent = apiOk? "Contagem de curtidas de todos os visitantes do site." : "Suas curtidas neste aparelho.";
+  if(apiOk) await Promise.all(FEED.map(f=>counts[f.id]!==undefined&&counts[f.id]>0?null:api("get",f.id).then(v=>counts[f.id]=v).catch(()=>{})));
+  const rank=FEED.map(f=>({f,c:shown(f.id)})).filter(r=>r.c>0).sort((a,b)=>b.c-a.c).slice(0,10);
+  $("#topList").innerHTML = rank.length? rank.map((r,i)=>`<li><button type="button" data-jump="${r.f.id}"><span class="r">${i+1}</span><span>${r.f.n}<small>${r.f.cat}</small></span><span class="c">♥ ${fmt(r.c)}</span></button></li>`).join("")
+    : `<li style="padding:14px 0;color:var(--muted)">Ainda sem curtidas. Toque duas vezes num item que você ama.</li>`; };
+$("#topClose").onclick=()=>$("#topSheet").classList.remove("open");
+$("#topList").addEventListener("click",e=>{ const b=e.target.closest("[data-jump]"); if(b){ $("#topSheet").classList.remove("open"); go(FEED.findIndex(f=>f.id===b.dataset.jump)); } });
+let flashT; function flash(m){ const h=$("#hint"); h.classList.remove("gone"); h.lastChild.textContent=m; clearTimeout(flashT); flashT=setTimeout(()=>h.classList.add("gone"),1400); }
+// link direto: …/#feed=cafes-filtrado-na-mupeco abre o feed nesse item (bom para QR code na mesa)
+if(location.hash.startsWith("#feed")) openFeed(decodeURIComponent(location.hash.split("=")[1]||""));
+
+/* ---------- galeria ---------- */
+const TILE_ART = {mupeco:["mupeco","#E9C9A8"], cafe:["cup","#EADDCB"], alfajor:["alfajor","#F3E3C6"], limenito:["star","#F6DCCB"], mazamorra:["bowl","#E6D5E8"], metodos:["three","#E3D4BF"], laranja:["orange","#F6E2C6"]};
+$("#gallery").innerHTML = PHOTOS.map((ph,i)=>{
+  const [ic,bg] = TILE_ART[ph.key]||["cup","#EADDCB"];
+  const inner = ph.src
+    ? `<img src="${ph.src}" alt="${ph.title}" loading="lazy" style="object-position:${ph.pos||"50% 50%"}">`
+    : `<span class="pat"></span><span class="art2"><svg viewBox="0 0 30 30" aria-hidden="true">${ICONS[ic]}</svg></span>`;
+  return `<figure class="tile ${ph.size} ${ph.src?"has-photo":""}" style="background:${bg}" ${ph.src?`tabindex="0" role="button" data-i="${i}" aria-label="Ampliar foto: ${ph.title}"`:""}>
+    ${inner}<figcaption><b>${ph.title}</b>${ph.credit?`<small>Foto: ${ph.credit}</small>`:""}</figcaption></figure>`;
+}).join("");
+if(!PHOTOS.some(p=>p.src)) $("#photoNote").textContent = "As fotos do café entram aqui em breve.";
+const lb = document.createElement("div"); lb.className="lightbox"; lb.setAttribute("role","dialog"); lb.setAttribute("aria-modal","true");
+lb.innerHTML = '<button type="button" aria-label="Fechar">×</button><div><img alt=""><p></p></div>'; document.body.appendChild(lb);
+function openLb(i){ const ph=PHOTOS[i]; lb.querySelector("img").src=ph.src; lb.querySelector("img").alt=ph.title; lb.querySelector("p").textContent=ph.title+(ph.credit?" · Foto: "+ph.credit:""); lb.classList.add("open"); lb.querySelector("button").focus(); }
+const closeLb=()=>lb.classList.remove("open");
+lb.addEventListener("click",e=>{ if(e.target===lb||e.target.closest("button")) closeLb(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeLb(); });
+$("#gallery").addEventListener("click",e=>{ const f=e.target.closest("[data-i]"); if(f) openLb(+f.dataset.i); });
+$("#gallery").addEventListener("keydown",e=>{ const f=e.target.closest("[data-i]"); if(f&&(e.key==="Enter"||e.key===" ")){ e.preventDefault(); openLb(+f.dataset.i); } });
+
+/* ---------- avaliações ---------- */
+$("#praise").innerHTML = PRAISE.map(r=>`
+  <article class="quote ${r.feature?"feature":""}">
+    ${r.score?`<div class="score"><b>${r.score}</b><span class="stars" aria-label="${r.score} de 5 estrelas">★★★★★</span></div>`:""}
+    <p>${r.text}</p>
+    <span class="src"><a href="${r.url}" target="_blank" rel="noopener">${r.source}</a> · ${r.kind}</span>
+  </article>`).join("");
+
+const hd=$("header"); addEventListener("scroll",()=>hd.classList.toggle("scrolled",scrollY>30),{passive:true});
+</script>
+</body>
+</html>
