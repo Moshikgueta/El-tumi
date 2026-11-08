@@ -700,6 +700,8 @@ const CONFIG = {
   // Deixe likesApi vazio ("") para guardar as curtidas só no aparelho de cada pessoa.
   likesApi: "https://abacus.jasoncameron.dev",
   likesNamespace: "eltumi-cafe-site",
+  // Servidor próprio de curtidas (pasta likes-api no repositório da Balcão). Endereço do Worker; vazio = contador grátis acima.
+  likesWorker: "",
   mapQuery:  "El Tumi Café, Alameda Augusto Stellfeld, 1281, Curitiba",
   // dia da semana: [abre, fecha] em minutos; null = fechado. 0=dom … 6=sáb
   hours: {0:[12*60,18*60], 1:null, 2:[10*60,18*60], 3:[10*60,18*60], 4:[10*60,18*60], 5:[10*60,18*60], 6:[10*60,18*60]}
@@ -954,9 +956,11 @@ const slug=s=>norm(s).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const FEED=MENU.flatMap(c=>c.items.map(x=>({...x,cat:c.name,catId:c.id,id:c.id+"-"+slug(x.n)})));
 const LKEY="eltumi-likes-v1"; const mine=new Set(JSON.parse(localStorage.getItem(LKEY)||"[]"));
 const SENT="eltumi-likes-sent-v1"; const sent=new Set(JSON.parse(localStorage.getItem(SENT)||"[]"));
-const counts={}; let apiOk=!!CONFIG.likesApi;
+const counts={}; let apiOk=!!(CONFIG.likesWorker||CONFIG.likesApi);
 const saveMine=()=>localStorage.setItem(LKEY,JSON.stringify([...mine]));
-const api=(op,id)=>fetch(`${CONFIG.likesApi}/${op}/${CONFIG.likesNamespace}/${id}`).then(r=>r.status===404?{value:0}:r.ok?r.json():Promise.reject(r.status)).then(j=>+j.value||0);
+const UID=(()=>{ try{ let u=localStorage.getItem("likes-uid"); if(!u){ u=(crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)+Math.random().toString(36).slice(2)).replace(/-/g,""); localStorage.setItem("likes-uid",u);} return u; }catch(_){ return "anon"+Math.random().toString(36).slice(2,18); } })();
+let allP; const wGet=()=>(allP=allP||fetch(`${CONFIG.likesWorker}/counts?site=eltumi`).then(r=>r.ok?r.json():Promise.reject()).then(j=>j.counts||{}));
+const api=(op,id)=> CONFIG.likesWorker ? (op==="get" ? wGet().then(c=>c[id]||0) : fetch(`${CONFIG.likesWorker}/like`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({site:"eltumi",item:id,uid:UID,on:op==="hit"})}).then(r=>r.ok?r.json():Promise.reject()).then(j=>+j.count||0)) : fetch(`${CONFIG.likesApi}/${op}/${CONFIG.likesNamespace}/${id}`).then(r=>r.status===404?{value:0}:r.ok?r.json():Promise.reject(r.status)).then(j=>+j.value||0);
 const shown=id=>apiOk? Math.max(counts[id]||0, mine.has(id)?1:0) : (mine.has(id)?1:0);
 function fmt(n){ return n>=1000? (n/1000).toFixed(1).replace(".",",")+" mil" : String(n); }
 const pricesHTML=x=>Array.isArray(x.p)? x.p.map(([l,v])=>`<span><small>${l}</small>${BRL0(v)}</span>`).join("") : `<span>${BRL0(x.p)}</span>`;
@@ -994,9 +998,10 @@ const feed=$("#feed"); let cur=0, lastF, hashT;
 const toSlide=(i,smooth)=>{ const s=reel.children[i]; if(s) reel.scrollTo({top:s.offsetTop, behavior: smooth&&!reduce?"smooth":"auto"}); };
 function updLike(id){ $$(`[data-like="${id}"]`).forEach(b=>b.setAttribute("aria-pressed",mine.has(id))); $$(`[data-n="${id}"]`).forEach(n=>n.textContent=fmt(shown(id))); }
 function like(id, force){
-  const on = force ?? !mine.has(id);
+  const prev = mine.has(id), on = force ?? !prev;
   if(on) mine.add(id); else mine.delete(id); saveMine();
-  if(on && apiOk && !sent.has(id)){ sent.add(id); localStorage.setItem(SENT,JSON.stringify([...sent])); counts[id]=(counts[id]||0)+1; updLike(id);
+  if(CONFIG.likesWorker){ if(apiOk && prev!==on){ counts[id]=Math.max(0,(counts[id]||0)+(on?1:-1)); updLike(id); api(on?"hit":"unhit",id).then(v=>{counts[id]=v; updLike(id);}).catch(()=>{}); } }
+  else if(on && apiOk && !sent.has(id)){ sent.add(id); localStorage.setItem(SENT,JSON.stringify([...sent])); counts[id]=(counts[id]||0)+1; updLike(id);
     api("hit",id).then(v=>{counts[id]=v; updLike(id);}).catch(()=>{}); }
   updLike(id);
   const b=$(`[data-like="${id}"]`); if(b){ b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
