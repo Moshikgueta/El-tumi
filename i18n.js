@@ -104,8 +104,7 @@ const ES = {
   "Ainda sem curtidas. Toque duas vezes num item que você ama.":"Todavía no hay me gusta. Toca dos veces algo que te encante.",
   "Link copiado":"Enlace copiado","Rodapé":"Pie de página",
   // placeholders
-  "Buscar no cardápio":"Buscar en la carta",
-  "Abrir no Google Maps":"Abrir en Google Maps"
+  "Buscar no cardápio":"Buscar en la carta"
 };
 const DIAS = {hoje:"hoy",amanhã:"mañana",domingo:"domingo",segunda:"lunes",terça:"martes",quarta:"miércoles",quinta:"jueves",sexta:"viernes",sábado:"sábado"};
 const RULES = [
@@ -217,8 +216,7 @@ const EN = {
   "Suas curtidas neste aparelho.":"Your likes on this device.","Contagem de curtidas de todos os visitantes do site.":"Likes from everyone who visits the site.",
   "Ainda sem curtidas. Toque duas vezes num item que você ama.":"No likes yet. Double-tap something you love.",
   "Link copiado":"Link copied",
-  "Buscar no cardápio":"Search the menu",
-  "Abrir no Google Maps":"Open in Google Maps"
+  "Buscar no cardápio":"Search the menu"
 };
 const DIAS_EN = {hoje:"today",amanhã:"tomorrow",domingo:"Sunday",segunda:"Monday",terça:"Tuesday",quarta:"Wednesday",quinta:"Thursday",sexta:"Friday",sábado:"Saturday"};
 const h12 = h => { const m=h.match(/^(\d+)h(\d*)$/); if(!m) return h; let n=+m[1]; const ap=n>=12?"pm":"am"; n=n%12||12; return n+(m[2]?":"+m[2]:"")+ap; };
@@ -265,7 +263,6 @@ function setLang(l){
   lang=l; localStorage.setItem("eltumi-lang",l); document.documentElement.lang = {pt:"pt-BR",es:"es",en:"en"}[l];
   document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===l));
   apply(document.body);
-  const g=document.getElementById("gmap"); if(g){ const hl={pt:"pt-BR",es:"es",en:"en"}[l]; const s=g.src.replace(/hl=[^&]*/,"hl="+hl); if(s!==g.src) g.src=s; }
 }
 document.addEventListener("click",e=>{ const b=e.target.closest("[data-lang]"); if(b) setLang(b.dataset.lang); });
 // idioma inicial: ?lang=… no link, a última escolha, ou o idioma do celular (pt → português, es → espanhol, outros → inglês)
