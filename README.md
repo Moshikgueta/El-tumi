@@ -12,4 +12,4 @@ No `<script>` do `index.html`:
 - `PHOTOS` — fotos da seção Destaques
 - `PRAISE` — avaliações e imprensa
 
-Esta branch fica neste repositório só para guardar o trabalho. Para publicar, mova o conteúdo para um repositório próprio (ex.: `eltumi-cafe`) e ative o GitHub Pages lá.
+Publicado com GitHub Pages: https://moshikgueta.github.io/El-tumi/
