@@ -150,8 +150,10 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 .card{background:var(--card);border-radius:20px;padding:32px;box-shadow:0 0 0 1px var(--line)}
 .card h3{margin:0 0 6px;font:400 26px/1.1 var(--display);letter-spacing:-.015em;color:var(--morado)}
 .card .a{color:var(--muted);margin:0 0 22px}
-.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:4px 0 22px}
-.day{border-radius:12px;padding:12px 4px;text-align:center;background:var(--clay);font-size:13px;color:var(--muted)}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:4px 0 22px}
+.visit>*{min-width:0}
+main{overflow-x:clip}
+.day{border-radius:12px;padding:12px 4px;text-align:center;background:var(--clay);font-size:13px;color:var(--muted);min-width:0;overflow:hidden;overflow-wrap:anywhere}
 .day b{display:block;font-size:14px;color:var(--ink);margin-bottom:4px}
 .day.off{opacity:.55}
 .day.today{background:var(--morado);color:#E7D6E6}
@@ -162,6 +164,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 .neighbors p{color:#F6D9C9}
 .neighbors .btn{background:#fff;color:var(--terra)}
 @media (max-width:900px){.storefront{grid-row:auto;min-height:0;aspect-ratio:4/5}.visit{grid-template-columns:1fr}.card{padding:24px}.day{padding:10px 2px;font-size:11.5px}.day b{font-size:12.5px}}
+@media (max-width:400px){.week{gap:4px}.card{padding:18px}.day{font-size:10px;padding:8px 1px;border-radius:8px}.day b{font-size:11px}}
 
 
 
@@ -243,6 +246,8 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 .slide .tagrow span{font-size:11.5px;font-weight:800;padding:4px 9px;border-radius:999px;background:rgba(255,255,255,.16)}
 .slide .tagrow .fav{background:var(--ocre);color:#2A1610}
 .rail{position:absolute;right:10px;bottom:calc(30px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:18px;align-items:center;z-index:2}
+.feed button{touch-action:manipulation}
+.reel{-webkit-overflow-scrolling:touch}
 .rail button,.rail a{width:54px;border:0;background:none;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px;font:700 12.5px var(--sans);cursor:pointer;text-decoration:none;font-variant-numeric:tabular-nums;padding:0}
 .rail .b{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);display:grid;place-items:center;transition:transform .15s var(--ease),background-color .2s ease}
 .rail button:active .b{transform:scale(.88)}
@@ -317,7 +322,10 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 .langs button[aria-pressed=true]{background:var(--morado);color:#fff}
 @media (max-width:820px){.langs{margin-left:auto}.langs+.status{margin-left:0}}
 @media (max-width:480px){.langs button{min-width:30px;height:30px;font-size:11.5px}.status{font-size:11px;padding:6px 8px}.brand>span{display:none}.nav{gap:8px}}
-.ftop .tt{white-space:nowrap}
+.ftop .tt{white-space:nowrap;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.ftop .sp{display:none}
+.ftop img,.fbtn{flex:none}
+@media (max-width:420px){.ftop{gap:8px}.fbtn{padding:0 11px;font-size:12.5px}}
 
 /* ---------- loja ---------- */
 .shop{padding-top:20px}
@@ -975,7 +983,8 @@ $("#reel").innerHTML=FEED.map((x,i)=>{ const [c1,c2,ic]=CATSTYLE[x.catId]; const
 $$("#reel .like .b").forEach(b=>b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.3-9.2C1.4 7.6 3.5 4.5 6.8 4.5c2 0 3.4 1.1 4.2 2.4h2c.8-1.3 2.2-2.4 4.2-2.4 3.3 0 5.4 3.1 4.1 6.3C19.5 15.4 12 20 12 20z"/></svg>`);
 $("#fcats").innerHTML=MENU.map(c=>`<button type="button" data-fcat="${c.id}">${c.name}</button>`).join("");
 
-const feed=$("#feed"), reel=$("#reel"); let cur=0, lastF;
+const feed=$("#feed"), reel=$("#reel"); let cur=0, lastF, hashT;
+const toSlide=(i,smooth)=>{ const s=reel.children[i]; if(s) reel.scrollTo({top:s.offsetTop, behavior: smooth&&!reduce?"smooth":"auto"}); };
 function updLike(id){ $$(`[data-like="${id}"]`).forEach(b=>b.setAttribute("aria-pressed",mine.has(id))); $$(`[data-n="${id}"]`).forEach(n=>n.textContent=fmt(shown(id))); }
 function like(id, force){
   const on = force ?? !mine.has(id);
@@ -987,14 +996,14 @@ function like(id, force){
 }
 function loadCount(id){ if(!apiOk || counts[id]!==undefined) return; counts[id]=counts[id]||0; api("get",id).then(v=>{counts[id]=v; updLike(id);}).catch(()=>{ apiOk=false; FEED.forEach(f=>updLike(f.id)); }); }
 const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const i=+e.target.dataset.i; cur=i; $$(".slide").forEach(s=>s.classList.toggle("active",s===e.target));
-  $("#fpos").textContent=`${i+1} / ${FEED.length}`; const c=FEED[i].catId; $$("#fcats button").forEach(b=>{ const on=b.dataset.fcat===c; b.setAttribute("aria-current",on); if(on) b.scrollIntoView({inline:"center",block:"nearest"}); });
+  $("#fpos").textContent=`${i+1} / ${FEED.length}`; const c=FEED[i].catId; $$("#fcats button").forEach(b=>{ const on=b.dataset.fcat===c; b.setAttribute("aria-current",on); if(on){ const fc=$("#fcats"); fc.scrollLeft = b.offsetLeft - fc.clientWidth/2 + b.clientWidth/2; } });
   loadCount(FEED[i].id); if(FEED[i+1]) loadCount(FEED[i+1].id); if(i>0) $("#hint").classList.add("gone");
-  history.replaceState(null,"","#feed="+FEED[i].id); } }),{root:reel,threshold:.6});
+  clearTimeout(hashT); hashT=setTimeout(()=>{ try{ history.replaceState(null,"","#feed="+FEED[i].id); }catch(_){} },500); } }),{root:reel,threshold:.6});
 $$(".slide").forEach(s=>io.observe(s));
-const go=i=>{ i=Math.max(0,Math.min(FEED.length-1,i)); reel.children[i].scrollIntoView({behavior:reduce?"auto":"smooth"}); };
+const go=i=>{ i=Math.max(0,Math.min(FEED.length-1,i)); toSlide(i,true); };
 function openFeed(id){ lastF=document.activeElement; feed.removeAttribute("inert"); feed.classList.add("open"); document.documentElement.style.overflow="hidden";
-  const i=Math.max(0,FEED.findIndex(f=>f.id===id)); reel.children[i].scrollIntoView(); setTimeout(()=>$("#fClose").focus({preventScroll:true}),50); }
-function closeFeed(){ feed.classList.remove("open"); feed.setAttribute("inert",""); document.documentElement.style.overflow=""; $("#topSheet").classList.remove("open"); history.replaceState(null,"",location.pathname+location.search); lastF&&lastF.focus&&lastF.focus({preventScroll:true}); }
+  const i=Math.max(0,FEED.findIndex(f=>f.id===id)); requestAnimationFrame(()=>toSlide(i,false)); setTimeout(()=>$("#fClose").focus({preventScroll:true}),50); }
+function closeFeed(){ clearTimeout(hashT); feed.classList.remove("open"); feed.setAttribute("inert",""); document.documentElement.style.overflow=""; $("#topSheet").classList.remove("open"); try{ history.replaceState(null,"",location.pathname+location.search); }catch(_){} lastF&&lastF.focus&&lastF.focus({preventScroll:true}); }
 $$("[data-open-feed]").forEach(b=>b.addEventListener("click",()=>openFeed()));
 $("#fClose").onclick=closeFeed;
 $("#fcats").addEventListener("click",e=>{ const b=e.target.closest("[data-fcat]"); if(b) go(FEED.findIndex(f=>f.catId===b.dataset.fcat)); });
