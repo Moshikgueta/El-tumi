@@ -685,7 +685,7 @@ footer a{text-decoration:none}
 const CONFIG = {
   instagram: "eltumicafe",
   // LOJA: deixe false até os produtos e preços estarem confirmados. Para ver a prévia, abra o site com ?loja=1
-  shopEnabled: false,
+  shopEnabled: true,
   // Se o café tiver WhatsApp, coloque aqui (só dígitos, ex.: "5541999999999") e o pedido vai direto por lá.
   whatsapp: "",
   // Curtidas compartilhadas entre todos os visitantes (contador gratuito, sem login).
@@ -812,14 +812,15 @@ const PRAISE = [
 
 /* ---------- LOJA: produtos (EXEMPLOS — confirmar com o El Tumi antes de ativar) ----------
    price: número em reais, ou null para "Consulte". opts: variações (ex.: moído / em grãos).
-   img: foto do produto em fotos/…  (sem foto, usa a ilustração "art"). */
+   img: foto do produto em fotos/…  (sem foto, usa a ilustração "art").
+   hidden:true esconde o produto da loja (use até o El Tumi confirmar que vende). */
 const PRODUCTS = [
   {id:"cafe-tumi", name:"Café Tumi 250g", desc:"O café da casa, o mesmo que vai na Mupeco.", price:null, art:"bag", badge:"Da casa", opts:["Em grãos","Moído para filtro","Moído para espresso"]},
   {id:"mupeco", name:"Mupeco", desc:"O filtro peruano de cerâmica, para fazer o ritual em casa.", price:null, img:"fotos/mupeco.jpg", badge:"Feito no Peru"},
-  {id:"kit-ritual", name:"Kit Ritual del Café", desc:"Mupeco + Café Tumi 250g, para presentear.", price:null, art:"kit"},
-  {id:"caneca", name:"Caneca Tumi", desc:"Caneca de cerâmica com o logo da casa.", price:null, art:"mug"},
-  {id:"camiseta", name:"Camiseta Tumi", desc:"Algodão, com o TUMI estampado no peito.", price:null, art:"tee", opts:["P","M","G","GG"]},
-  {id:"ecobag", name:"Ecobag Tumi", desc:"Para levar o café, o pão e o que mais couber.", price:null, art:"tote"},
+  {id:"kit-ritual", name:"Kit Ritual del Café", desc:"Mupeco + Café Tumi 250g, para presentear.", price:null, art:"kit", hidden:true},
+  {id:"caneca", name:"Caneca Tumi", desc:"Caneca de cerâmica com o logo da casa.", price:null, art:"mug", hidden:true},
+  {id:"camiseta", name:"Camiseta Tumi", desc:"Algodão, com o TUMI estampado no peito.", price:null, art:"tee", opts:["P","M","G","GG"], hidden:true},
+  {id:"ecobag", name:"Ecobag Tumi", desc:"Para levar o café, o pão e o que mais couber.", price:null, art:"tote", hidden:true},
   {id:"alfajores", name:"Caixa de alfajores", desc:"Alfajores peruanos da casa para levar.", price:null, img:"fotos/alfajor-cafe.jpg", opts:["4 unidades","6 unidades"]}
 ];
 /* ============================== */
@@ -1040,7 +1041,9 @@ if(location.hash.startsWith("#feed")) openFeed(decodeURIComponent(location.hash.
   };
   const fmt = p => p==null ? "Consulte" : p.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
   const media = (x,cls="") => x.img ? `<img src="${x.img}" alt="${x.name}" loading="lazy">` : ART[x.art]||"";
-  $("#shopRail").innerHTML = PRODUCTS.map(x=>`
+  const SHOWN = PRODUCTS.filter(p=>!p.hidden);
+  if(SHOWN.length<=3) $$(".rail-btn").forEach(b=>b.style.display="none");
+  $("#shopRail").innerHTML = SHOWN.map(x=>`
     <article class="prod">
       <div class="ph">${media(x)}${x.badge?`<span class="badge">${x.badge}</span>`:""}</div>
       <h3>${x.name}</h3><p class="pd">${x.desc}</p>
@@ -1052,7 +1055,7 @@ if(location.hash.startsWith("#feed")) openFeed(decodeURIComponent(location.hash.
 
   let bag = JSON.parse(sessionStorage.getItem("eltumi-bag")||"[]"); // [{id,opt,q}]
   const P = id => PRODUCTS.find(p=>p.id===id);
-  bag = bag.filter(l=>P(l.id));
+  bag = bag.filter(l=>P(l.id) && !P(l.id).hidden);
   const save=()=>sessionStorage.setItem("eltumi-bag",JSON.stringify(bag));
   const count=()=>bag.reduce((a,l)=>a+l.q,0);
   const total=()=>bag.reduce((a,l)=>a+(P(l.id).price||0)*l.q,0);
