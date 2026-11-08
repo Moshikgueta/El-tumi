@@ -104,7 +104,46 @@ const ES = {
   "Ainda sem curtidas. Toque duas vezes num item que você ama.":"Todavía no hay me gusta. Toca dos veces algo que te encante.",
   "Link copiado":"Enlace copiado","Rodapé":"Pie de página",
   // placeholders
-  "Buscar no cardápio":"Buscar en la carta"
+  "Buscar no cardápio":"Buscar en la carta",
+  // loja
+  "Loja":"Tienda",
+  "Loja Tumi":"Tienda Tumi",
+  "Leve o Tumi para casa.":"Llévate el Tumi a casa.",
+  "Nosso café, o Mupeco e os produtos da casa. Monte o pedido aqui e retire no café.":"Nuestro café, la Mupeco y los productos de la casa. Arma tu pedido aquí y recógelo en el café.",
+  "Pagamento e retirada no café. A gente confirma a disponibilidade pelo Instagram.":"Pago y retiro en el café. Confirmamos la disponibilidad por Instagram.",
+  "Café Tumi 250g":"Café Tumi 250g",
+  "O café da casa, o mesmo que vai na Mupeco.":"El café de la casa, el mismo que usamos en la Mupeco.",
+  "O filtro peruano de cerâmica, para fazer o ritual em casa.":"El filtro peruano de cerámica, para hacer el ritual en casa.",
+  "Mupeco + Café Tumi 250g, para presentear.":"Mupeco + Café Tumi 250g, para regalar.",
+  "Caneca Tumi":"Taza Tumi",
+  "Caneca de cerâmica com o logo da casa.":"Taza de cerámica con el logo de la casa.",
+  "Camiseta Tumi":"Polo Tumi",
+  "Algodão, com o TUMI estampado no peito.":"De algodón, con TUMI estampado en el pecho.",
+  "Ecobag Tumi":"Bolsa Tumi",
+  "Para levar o café, o pão e o que mais couber.":"Para llevar el café, el pan y lo que quepa.",
+  "Caixa de alfajores":"Caja de alfajores",
+  "Alfajores peruanos da casa para levar.":"Alfajores peruanos de la casa para llevar.",
+  "Da casa":"De la casa",
+  "Feito no Peru":"Hecho en Perú",
+  "Em grãos":"En grano",
+  "Moído para filtro":"Molido para filtro",
+  "Moído para espresso":"Molido para espresso",
+  "4 unidades":"4 unidades",
+  "6 unidades":"6 unidades",
+  "Consulte":"Consultar",
+  "preço no café":"precio en el café",
+  "Adicionar":"Agregar",
+  "Sua sacola":"Tu bolsa",
+  "Total":"Total",
+  "Seu nome":"Tu nombre",
+  "Enviar pedido":"Enviar pedido",
+  "O pedido é copiado e o Direct do Instagram abre. É só colar e enviar.":"El pedido se copia y se abre el Direct de Instagram. Solo pégalo y envíalo.",
+  "Sua sacola está vazia.":"Tu bolsa está vacía.",
+  "A consultar":"A consultar",
+  "Para separarmos seu pedido":"Para separar tu pedido",
+  "Pedido copiado. Cole no Direct.":"Pedido copiado. Pégalo en el Direct.",
+  "Adicione pelo menos um produto.":"Agrega al menos un producto.",
+  "Digite seu nome.":"Escribe tu nombre."
 };
 const DIAS = {hoje:"hoy",amanhã:"mañana",domingo:"domingo",segunda:"lunes",terça:"martes",quarta:"miércoles",quinta:"jueves",sexta:"viernes",sábado:"sábado"};
 const RULES = [
@@ -112,6 +151,7 @@ const RULES = [
   [/^Fechado · abre (\S+) às (.+)$/, (m,d,h)=>`Cerrado · abre ${DIAS[d]||d} a las ${h}`],
   [/^· (\d+) (mês|meses) atrás · Google$/, (m,n,u)=>`· hace ${n} ${u==="mês"?"mes":"meses"} · Google`],
   [/^Foto de (.+) no Google$/, (m,n)=>`Foto de ${n} en Google`],
+  [/^(.+) na sacola$/, (m,n)=>`${tr(n,"es").trim()} en tu bolsa`],
   [/^(\d+) \/ (\d+)$/, m=>m]
 ];
 const EN = {
@@ -216,7 +256,47 @@ const EN = {
   "Suas curtidas neste aparelho.":"Your likes on this device.","Contagem de curtidas de todos os visitantes do site.":"Likes from everyone who visits the site.",
   "Ainda sem curtidas. Toque duas vezes num item que você ama.":"No likes yet. Double-tap something you love.",
   "Link copiado":"Link copied",
-  "Buscar no cardápio":"Search the menu"
+  "Buscar no cardápio":"Search the menu",
+  // shop
+  "Loja":"Shop",
+  "Loja Tumi":"Tumi shop",
+  "Leve o Tumi para casa.":"Take Tumi home.",
+  "Nosso café, o Mupeco e os produtos da casa. Monte o pedido aqui e retire no café.":"Our coffee, the Mupeco and house goods. Build your order here and pick it up at the café.",
+  "Pagamento e retirada no café. A gente confirma a disponibilidade pelo Instagram.":"Pay and pick up at the café. We confirm availability on Instagram.",
+  "Café Tumi 250g":"Tumi coffee 250g",
+  "O café da casa, o mesmo que vai na Mupeco.":"Our house coffee, the same one we brew in the Mupeco.",
+  "O filtro peruano de cerâmica, para fazer o ritual em casa.":"The Peruvian clay filter, to enjoy the ritual at home.",
+  "Mupeco + Café Tumi 250g, para presentear.":"Mupeco + Tumi coffee 250g, a perfect gift.",
+  "Kit Ritual del Café":"Ritual del Café gift set",
+  "Caneca Tumi":"Tumi mug",
+  "Caneca de cerâmica com o logo da casa.":"Ceramic mug with our logo.",
+  "Camiseta Tumi":"Tumi T-shirt",
+  "Algodão, com o TUMI estampado no peito.":"Cotton, with TUMI printed on the chest.",
+  "Ecobag Tumi":"Tumi tote bag",
+  "Para levar o café, o pão e o que mais couber.":"For your coffee, bread and whatever else fits.",
+  "Caixa de alfajores":"Box of alfajores",
+  "Alfajores peruanos da casa para levar.":"Our Peruvian alfajores, to take away.",
+  "Da casa":"House",
+  "Feito no Peru":"Made in Peru",
+  "Em grãos":"Whole bean",
+  "Moído para filtro":"Ground for filter",
+  "Moído para espresso":"Ground for espresso",
+  "4 unidades":"4 pieces",
+  "6 unidades":"6 pieces",
+  "Consulte":"Ask us",
+  "preço no café":"price at the café",
+  "Adicionar":"Add",
+  "Sua sacola":"Your bag",
+  "Total":"Total",
+  "Seu nome":"Your name",
+  "Enviar pedido":"Send order",
+  "O pedido é copiado e o Direct do Instagram abre. É só colar e enviar.":"Your order is copied and Instagram Direct opens. Just paste and send.",
+  "Sua sacola está vazia.":"Your bag is empty.",
+  "A consultar":"To be confirmed",
+  "Para separarmos seu pedido":"So we can set your order aside",
+  "Pedido copiado. Cole no Direct.":"Order copied. Paste it in Direct.",
+  "Adicione pelo menos um produto.":"Add at least one product.",
+  "Digite seu nome.":"Please enter your name."
 };
 const DIAS_EN = {hoje:"today",amanhã:"tomorrow",domingo:"Sunday",segunda:"Monday",terça:"Tuesday",quarta:"Wednesday",quinta:"Thursday",sexta:"Friday",sábado:"Saturday"};
 const h12 = h => { const m=h.match(/^(\d+)h(\d*)$/); if(!m) return h; let n=+m[1]; const ap=n>=12?"pm":"am"; n=n%12||12; return n+(m[2]?":"+m[2]:"")+ap; };
@@ -224,7 +304,8 @@ const RULES_EN = [
   [/^Aberto · até (.+)$/, (m,h)=>`Open · until ${h12(h)}`],
   [/^Fechado · abre (\S+) às (.+)$/, (m,d,h)=>`Closed · opens ${DIAS_EN[d]||d} at ${h12(h)}`],
   [/^· (\d+) (mês|meses) atrás · Google$/, (m,n,u)=>`· ${n} ${u==="mês"?"month":"months"} ago · Google`],
-  [/^Foto de (.+) no Google$/, (m,n)=>`Photo by ${n} on Google`]
+  [/^Foto de (.+) no Google$/, (m,n)=>`Photo by ${n} on Google`],
+  [/^(.+) na sacola$/, (m,n)=>`${tr(n,"en").trim()} added to your bag`]
 ];
 const DICTS = {es:[ES,RULES], en:[EN,RULES_EN]};
 function tr(s, l){
