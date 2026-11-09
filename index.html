@@ -378,6 +378,30 @@ main{overflow-x:clip}
 .bag-send{width:100%}
 .bag-err{margin:0;color:#9E2B1E;font-size:13.5px}.bag-err:empty{display:none}
 .bag-hint{margin:0;font-size:12.5px;color:var(--muted);text-align:center}
+/* agenda de eventos */
+.events-sec{background:var(--morado);color:#fff}
+.events-sec .kick{color:var(--ocre)!important}
+.events-sec h2{color:#fff}
+.events-sec .sec-head p{color:rgba(255,255,255,.78)}
+.evs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:16px}
+.ev{display:grid;grid-template-columns:84px 1fr;gap:18px;padding:22px;border-radius:20px;background:var(--card);color:var(--ink);box-shadow:0 24px 50px -30px rgba(0,0,0,.6)}
+.ev-date{display:flex;flex-direction:column;align-items:center;justify-content:center;height:96px;border-radius:16px;background:var(--clay-2);text-align:center;line-height:1}
+.ev-date small{font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra)}
+.ev-date b{font:400 38px/1 var(--display);margin:4px 0 3px}
+.ev-date span{font-size:12.5px;color:var(--muted)}
+.ev-kind{display:inline-block;margin-bottom:6px;padding:3px 10px;border-radius:999px;background:var(--cream);color:var(--morado);font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.ev h3{margin:0 0 6px;font:400 21px/1.15 var(--display)}
+.ev p{margin:0 0 12px;font-size:14.5px;color:var(--muted)}
+.ev-meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:14px;font-size:13.5px;font-weight:600}
+.ev-meta span{display:inline-flex;align-items:center;gap:5px}
+.ev-acts{display:flex;flex-wrap:wrap;gap:8px}
+.ev-acts .btn{height:44px;padding:0 14px;font-size:13.5px}
+.ev-empty{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:26px 28px;border-radius:20px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16)}
+.ev-empty h3{margin:0 0 4px;font:400 22px/1.2 var(--display)}
+.ev-empty p{margin:0;color:rgba(255,255,255,.78)}
+.ev-empty .btn{background:#fff;color:var(--morado)}
+@media (max-width:480px){.ev{grid-template-columns:1fr;gap:12px}.ev-date{flex-direction:row;gap:10px;height:auto;padding:10px 14px;justify-content:flex-start}.ev-date b{font-size:28px;margin:0}}
+
 .shop-toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,10px);opacity:0;z-index:57;background:var(--ink);color:#fff;font-size:14px;padding:10px 16px;border-radius:999px;pointer-events:none;transition:opacity .2s ease,transform .25s var(--ease)}
 .shop-toast.show{opacity:1;transform:translate(-50%,0)}
 
@@ -445,6 +469,7 @@ footer a{text-decoration:none}
       <a href="#mupeco">Mupeco</a>
       <a href="#cardapio">Cardápio</a>
       <a href="#loja" data-shop-link hidden>Loja</a>
+      <a href="#agenda">Agenda</a>
       <a href="#avaliacoes">Avaliações</a>
       <a href="#visite">Visite</a>
     </nav>
@@ -589,6 +614,16 @@ footer a{text-decoration:none}
     <div class="wrap"><p class="shop-note">Pagamento e retirada no café. A gente confirma a disponibilidade pelo Instagram.</p></div>
   </section>
 
+  <section id="agenda" class="events-sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="kick">Agenda</p><h2>Eventos no El Tumi.</h2></div>
+        <p>Degustações, oficinas e noites especiais na casa. Garanta o seu lugar pelo Direct do Instagram.</p>
+      </div>
+      <div class="evs" id="evList"></div>
+    </div>
+  </section>
+
   <section id="avaliacoes" style="padding-top:20px">
     <div class="wrap">
       <div class="sec-head">
@@ -706,6 +741,13 @@ const CONFIG = {
   // dia da semana: [abre, fecha] em minutos; null = fechado. 0=dom … 6=sáb
   hours: {0:[12*60,18*60], 1:null, 2:[10*60,18*60], 3:[10*60,18*60], 4:[10*60,18*60], 5:[10*60,18*60], 6:[10*60,18*60]}
 };
+// AGENDA DE EVENTOS: um evento por linha. Os que já passaram somem sozinhos.
+// date: "AAAA-MM-DD" · time: "19h" ou "19h30" · end: horário de término (opcional)
+// price: "R$ 45", "Grátis" ou "" · spots: vagas (opcional) · kind: tipo do evento
+// Exemplo:
+// {date:"2026-12-05", time:"10h", end:"12h", kind:"Oficina", title:"Oficina de Mupeco", desc:"Aprenda a preparar café na Mupeco em casa.", price:"R$ 60", spots:8},
+const EVENTS = [
+];
 // Cardápio oficial do El Tumi. Preço: número, ou lista de [tamanho, preço].
 // tags: "fav" = Favoritos do Tumi (★) · "veg" = vegano · "gf" = sem glúten
 const MENU = [
@@ -1117,6 +1159,51 @@ if(location.hash.startsWith("#feed")) openFeed(decodeURIComponent(location.hash.
   render();
 })();
 
+/* ---------- agenda de eventos ---------- */
+(()=>{
+  const DEMO=[ // só aparece com ?eventos=demo, para ver como fica
+    {date:"2099-12-05",time:"10h",end:"12h",kind:"Oficina",title:"Oficina de Mupeco",desc:"Aprenda a preparar café na Mupeco em casa, com os grãos da casa.",price:"R$ 60",spots:8},
+    {date:"2099-12-12",time:"16h",end:"18h",kind:"Degustação",title:"Tarde de sabores peruanos",desc:"Alfajor, limeñito e mazamorra morada harmonizados com cafés especiais.",price:"R$ 45",spots:12},
+    {date:"2099-12-19",time:"17h",kind:"Música",title:"Música andina ao vivo",desc:"Fim de tarde com música peruana na calçada do Tumi.",price:"Grátis"}
+  ];
+  const list=new URLSearchParams(location.search).get("eventos")==="demo"?DEMO:EVENTS;
+  const today=new Intl.DateTimeFormat("en-CA",{timeZone:"America/Sao_Paulo"}).format(new Date());
+  const up=list.filter(e=>e.date>=today).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  const MES=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"], SEM=["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
+  const d=e=>{ const [y,m,dd]=e.date.split("-").map(Number); return {y,m,dd,w:new Date(Date.UTC(y,m-1,dd,12)).getUTCDay()}; };
+  const esc=x=>String(x??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const box=$("#evList");
+  if(!up.length){
+    box.outerHTML=`<div class="ev-empty"><div><h3>Novos eventos em breve.</h3><p>Siga o @${CONFIG.instagram} para saber primeiro das próximas degustações e oficinas.</p></div><a class="btn" data-ig href="https://instagram.com/${CONFIG.instagram}" target="_blank" rel="noopener">Seguir no Instagram</a></div>`;
+    return;
+  }
+  box.innerHTML=up.map((e,i)=>{ const x=d(e); return `<article class="ev">
+    <div class="ev-date"><small>${SEM[x.w].slice(0,3)}</small><b>${x.dd}</b><span>${MES[x.m-1]}</span></div>
+    <div>${e.kind?`<span class="ev-kind">${esc(e.kind)}</span>`:""}<h3>${esc(e.title)}</h3>${e.desc?`<p>${esc(e.desc)}</p>`:""}
+      <div class="ev-meta"><span>🕒 ${esc(e.time)}${e.end?`–${esc(e.end)}`:""}</span>${e.price?`<span>🎟️ ${esc(e.price)}</span>`:""}${e.spots?`<span>👥 ${e.spots} vagas</span>`:""}</div>
+      <div class="ev-acts"><button class="btn btn-m" type="button" data-ev="${i}">Quero participar</button><button class="btn btn-o" type="button" data-cal="${i}">Pôr na agenda</button></div>
+    </div></article>`; }).join("");
+  let tT; const toast=m=>{ const t=$("#shopToast"); t.textContent=m; t.classList.add("show"); clearTimeout(tT); tT=setTimeout(()=>t.classList.remove("show"),1800); };
+  const hm=t=>{ const m=String(t||"").match(/^(\d{1,2})h(\d{2})?$/); return m?[+m[1],+(m[2]||0)]:[10,0]; };
+  box.addEventListener("click",ev=>{
+    const a=ev.target.closest("[data-ev]"), c=ev.target.closest("[data-cal]");
+    if(a){ const e=up[+a.dataset.ev], x=d(e);
+      const msg=`Olá, El Tumi! Quero participar do evento “${e.title}” no dia ${x.dd}/${String(x.m).padStart(2,"0")}, às ${e.time}. Meu nome é: `;
+      if(CONFIG.whatsapp){ window.open("https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg),"_blank","noopener"); return; }
+      const go=()=>window.open("https://ig.me/m/"+CONFIG.instagram,"_blank","noopener");
+      (navigator.clipboard?navigator.clipboard.writeText(msg):Promise.reject()).then(()=>{ toast("Mensagem copiada. Cole no Direct."); setTimeout(go,600); })
+        .catch(()=>{ prompt("Copie a mensagem e cole no Direct do Instagram:",msg); go(); });
+    }
+    if(c){ const e=up[+c.dataset.cal], x=d(e), [h,mi]=hm(e.time), [h2,m2]=e.end?hm(e.end):[h+2,mi];
+      const p=n=>String(n).padStart(2,"0"), dt=(H,M)=>`${x.y}${p(x.m)}${p(x.dd)}T${p(H)}${p(M)}00`;
+      const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//El Tumi Café//Agenda//PT","BEGIN:VEVENT",`UID:${e.date}-${p(h)}${p(mi)}@eltumi`,`DTSTAMP:${new Date().toISOString().replace(/[-:]/g,"").slice(0,15)}Z`,
+        `DTSTART;TZID=America/Sao_Paulo:${dt(h,mi)}`,`DTEND;TZID=America/Sao_Paulo:${dt(h2,m2)}`,`SUMMARY:${e.title} · El Tumi Café`,`LOCATION:El Tumi Café, Alameda Augusto Stellfeld, 1281, Curitiba`,`DESCRIPTION:${(e.desc||"").replace(/\n/g," ")}`,"END:VEVENT","END:VCALENDAR"].join("\r\n");
+      const url=URL.createObjectURL(new Blob([ics],{type:"text/calendar"})), l=document.createElement("a");
+      l.href=url; l.download="evento-el-tumi.ics"; document.body.appendChild(l); l.click(); l.remove(); setTimeout(()=>URL.revokeObjectURL(url),2000);
+    }
+  });
+})();
+
 /* ---------- galeria ---------- */
 const TILE_ART = {mupeco:["mupeco","#E9C9A8"], cafe:["cup","#EADDCB"], alfajor:["alfajor","#F3E3C6"], limenito:["star","#F6DCCB"], mazamorra:["bowl","#E6D5E8"], metodos:["three","#E3D4BF"], laranja:["orange","#F6E2C6"]};
 $("#gallery").innerHTML = PHOTOS.map((ph,i)=>{
@@ -1154,6 +1241,6 @@ $("#praise").innerHTML = PRAISE.map(r=>`
 
 const hd=$("header"); addEventListener("scroll",()=>hd.classList.toggle("scrolled",scrollY>30),{passive:true});
 </script>
-<script src="i18n.js?v=4"></script>
+<script src="i18n.js?v=5"></script>
 </body>
 </html>

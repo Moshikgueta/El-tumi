@@ -4,6 +4,7 @@
    As avaliações dos clientes ficam no idioma original (são citações). */
 (function(){
 const ES = {
+  "Agenda":"Agenda","Eventos no El Tumi.":"Eventos en El Tumi.","Degustações, oficinas e noites especiais na casa. Garanta o seu lugar pelo Direct do Instagram.":"Degustaciones, talleres y noches especiales en la casa. Reserva tu lugar por Direct de Instagram.","Quero participar":"Quiero participar","Pôr na agenda":"Agregar al calendario","Novos eventos em breve.":"Nuevos eventos muy pronto.","Mensagem copiada. Cole no Direct.":"Mensaje copiado. Pégalo en Direct.","Oficina":"Taller","Degustação":"Degustación","Música":"Música","Grátis":"Gratis",
   // topo e navegação
   "Café peruano":"Café peruano","Cardápio":"Carta","Avaliações":"Reseñas","Visite":"Visítanos",
   "Café especial com alma":"Café de especialidad con alma",", aqui no Bigorrilho.":", aquí en Bigorrilho.",
@@ -147,6 +148,8 @@ const ES = {
 };
 const DIAS = {hoje:"hoy",amanhã:"mañana",domingo:"domingo",segunda:"lunes",terça:"martes",quarta:"miércoles",quinta:"jueves",sexta:"viernes",sábado:"sábado"};
 const RULES = [
+  [/^Siga o @(\S+) para saber primeiro das próximas degustações e oficinas\.$/, (m,u)=>`Sigue a @${u} para enterarte primero de las próximas degustaciones y talleres.`],
+  [/^(\d+) vagas$/, (m,n)=>`${n} cupos`],
   [/^Aberto · até (.+)$/, (m,h)=>`Abierto · hasta las ${h}`],
   [/^Fechado · abre (\S+) às (.+)$/, (m,d,h)=>`Cerrado · abre ${DIAS[d]||d} a las ${h}`],
   [/^· (\d+) (mês|meses) atrás · Google$/, (m,n,u)=>`· hace ${n} ${u==="mês"?"mes":"meses"} · Google`],
@@ -155,6 +158,7 @@ const RULES = [
   [/^(\d+) \/ (\d+)$/, m=>m]
 ];
 const EN = {
+  "Agenda":"Events","Eventos no El Tumi.":"Events at El Tumi.","Degustações, oficinas e noites especiais na casa. Garanta o seu lugar pelo Direct do Instagram.":"Tastings, workshops and special evenings at the café. Save your spot via Instagram Direct.","Quero participar":"I want to join","Pôr na agenda":"Add to calendar","Novos eventos em breve.":"New events coming soon.","Mensagem copiada. Cole no Direct.":"Message copied. Paste it in Direct.","Oficina":"Workshop","Degustação":"Tasting","Música":"Music","Grátis":"Free",
   // top & navigation
   "Café peruano":"Peruvian café","Cardápio":"Menu","Avaliações":"Reviews","Visite":"Visit",
   "Café especial com alma":"Specialty coffee with a",", aqui no Bigorrilho.":" soul, right here in Bigorrilho.",
@@ -301,6 +305,8 @@ const EN = {
 const DIAS_EN = {hoje:"today",amanhã:"tomorrow",domingo:"Sunday",segunda:"Monday",terça:"Tuesday",quarta:"Wednesday",quinta:"Thursday",sexta:"Friday",sábado:"Saturday"};
 const h12 = h => { const m=h.match(/^(\d+)h(\d*)$/); if(!m) return h; let n=+m[1]; const ap=n>=12?"pm":"am"; n=n%12||12; return n+(m[2]?":"+m[2]:"")+ap; };
 const RULES_EN = [
+  [/^Siga o @(\S+) para saber primeiro das próximas degustações e oficinas\.$/, (m,u)=>`Follow @${u} to be the first to hear about upcoming tastings and workshops.`],
+  [/^(\d+) vagas$/, (m,n)=>`${n} spots`],
   [/^Aberto · até (.+)$/, (m,h)=>`Open · until ${h12(h)}`],
   [/^Fechado · abre (\S+) às (.+)$/, (m,d,h)=>`Closed · opens ${DIAS_EN[d]||d} at ${h12(h)}`],
   [/^· (\d+) (mês|meses) atrás · Google$/, (m,n,u)=>`· ${n} ${u==="mês"?"month":"months"} ago · Google`],
